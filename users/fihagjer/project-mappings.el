@@ -33,6 +33,7 @@
                 (find-file "/finn/svn/trunk")))
 
 (project-specifics "/finn/svn/trunk"
+                   (iad-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p f") 'custom-persp/finn)
@@ -45,6 +46,7 @@
                 (find-file "/finn/svn/trunk/minfinn")))
 
 (project-specifics "/finn/svn/trunk/minfinn"
+                   (iad-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p m") 'custom-persp/minfinn)
