@@ -162,3 +162,26 @@
 ;; Conclude init by setting up specifics for the current user
 (when (file-exists-p user-settings-dir)
   (mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;fihagjer changes
+(add-to-list 'load-path "./site-lisp/emacs-nav/")
+(require 'nav)
+(nav-disable-overeager-window-splitting)
+;; Optional: set up a quick key to toggle nav
+(global-set-key [f8] 'nav-toggle)
+
+(defun svn-meld ()
+  (interactive)
+  (let* (file (buffer-file-name))
+    (shell-command (concat "svn diff --diff-cmd=/usr/bin/meld " file ))))
+
+(defun svn-kompare ()
+  (interactive)
+  (let* (file (buffer-file-name))
+  (shell-command (concat "svn diff " file "| kompare -o -"))))
+
+(defun lookup-file (path file)
+  (interactive "DPath: \nsFile: \n" )
+  (find-dired path (concat "-type f -name '*" file "*'")))

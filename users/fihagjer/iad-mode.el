@@ -31,6 +31,7 @@ in an exploded war, re-deploy the file."
   (let* ((source (buffer-file-name))
          (target (s-with source
                    (s-replace "/travel/src/main/webapp" iad-target-dir)
+                   (s-replace "/strapon/src/main/webapp" iad-target-dir)
                    (s-replace "/minfinn/src/main/webapp" iad-target-dir)
                    (s-replace "/licensee-finn/finn/src/main/webapp" iad-target-dir))))
     (if (and (file-writable-p target)

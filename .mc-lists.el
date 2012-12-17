@@ -51,6 +51,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        handle-switch-frame
         js2r-extract-var
         js2r-rename-var
         wgrep-change-to-wgrep-mode
