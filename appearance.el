@@ -4,6 +4,7 @@
       truncate-partial-width-windows nil)
 
 (set-face-background 'region "#464740")
+(set-face-foreground 'font-lock-comment-face "#999999")
 
 ;; Highlight current line
 (global-hl-line-mode 1)

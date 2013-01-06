@@ -128,9 +128,7 @@
 (require 'browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-;; Smart M-x is smart
-(require 'smex)
-(smex-initialize)
+
 
 ;; Setup key bindings
 (require 'key-bindings)
@@ -185,3 +183,24 @@
 (defun lookup-file (path file)
   (interactive "DPath: \nsFile: \n" )
   (find-dired path (concat "-type f -name '*" file "*'")))
+
+
+(defun comment-current-line()
+  (interactive)
+  (beginning-of-visual-line)
+  (insert "//"))
+
+;; F6 copy whole buffer
+(defun copy-whole-buffer ()
+  "Copy entire buffer to clipboard"
+  (interactive)
+  (clipboard-kill-ring-save (point-min) (point-max)))
+
+(defun insert-asterix()
+  (interactive)
+  (insert "*"))
+
+;;;;;;;;;;;;;;; TODO - fixit
+;; Smart M-x is smart
+;;(require 'smex)
+;;(smex-initialize)

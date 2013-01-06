@@ -59,6 +59,7 @@
                 (find-file "/finn/repo/common-web/trunk/commons-web/")))
 
 (project-specifics "/finn/repo/common-web/trunk/commons-web/"
+                   (common-web-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p w") 'custom-persp/commons-web)
@@ -70,6 +71,7 @@
                 (find-file "/finn/repo/common-web/trunk/analytics-js/")))
 
 (project-specifics "/finn/repo/common-web/trunk/analytics-js/"
+                   (analytics-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p a") 'custom-persp/analytics)
