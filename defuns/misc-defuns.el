@@ -23,7 +23,7 @@
   (unwind-protect
       (progn
         (linum-mode 1)
-        (goto-line (read-number "Goto line: ")))
+        (call-interactively 'goto-line))
     (linum-mode -1)))
 
 ;; Add spaces and proper formatting to linum-mode. It uses more room than
@@ -91,11 +91,6 @@
 (defun buffer-to-html (buffer)
   (with-current-buffer (htmlize-buffer buffer)
     (buffer-string)))
-
-(defun recompile-init ()
-  "Byte-compile all your dotfiles again."
-  (interactive)
-  (byte-recompile-directory dotfiles-dir 0))
 
 (defun sudo-edit (&optional arg)
   (interactive "p")
