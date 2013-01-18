@@ -22,7 +22,6 @@
 
 (require 's)
 
-
 ;;(defvar common-web-target-dir "/finn/svn/trunk/licensee-finn/finn/overlays/no.finntech.commons-web-*")
 (defvar common-web-target-dir "/finn/svn/trunk/licensee-finn/finn/target/exploded")
 (defun common-web-hot-deploy-buffer-file ()
@@ -31,7 +30,10 @@ in an exploded war, re-deploy the file."
   (interactive)
   (let* ((source (buffer-file-name))
          (target (s-with source
-                   (s-replace "/finn/repo/common-web/trunk/commons-web/src/main/webapp" common-web-target-dir))))
+                   (s-replace "/finn/repo/common-web/trunk/commons-web/src/main/webapp" common-web-target-dir)
+                   (s-replace "/finn/repo/common-web/trunk/analytics-js/src/main/webapp" common-web-target-dir)
+                   (s-replace "/finn/repo/common-web/trunk/core-js/src/main/webapp" common-web-target-dir)
+                   (s-replace "/finn/repo/common-web/trunk/mupf-js/src/main/webapp" common-web-target-dir))))
     (if (and (file-writable-p target)
              (not (string= source target)))
         (progn

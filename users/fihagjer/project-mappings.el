@@ -49,7 +49,7 @@
                    (iad-mode 1)
                    (setup-find-file-in-project))
 
-(define-key persp-mode-map (kbd "C-x p m") 'custom-persp/minfinn)
+(define-key persp-mode-map (kbd "C-x p p") 'custom-persp/minfinn)
 
 
 ;; COMMONS-WEB
@@ -64,14 +64,27 @@
 
 (define-key persp-mode-map (kbd "C-x p w") 'custom-persp/commons-web)
 
-;; Analytics
-(defun custom-persp/analytics ()
+;; MUPF-JS
+(defun custom-persp/mupf ()
   (interactive)
-  (custom-persp "analytics-js"
-                (find-file "/finn/repo/common-web/trunk/analytics-js/")))
+  (custom-persp "mupf-js"
+                (find-file "/finn/repo/common-web/trunk/mupf-js/")))
 
-(project-specifics "/finn/repo/common-web/trunk/analytics-js/"
-                   (analytics-mode 1)
+(project-specifics "/finn/repo/common-web/trunk/mupf-js/"
+                   (common-web-mode 1)
                    (setup-find-file-in-project))
 
-(define-key persp-mode-map (kbd "C-x p a") 'custom-persp/analytics)
+(define-key persp-mode-map (kbd "C-x p m") 'custom-persp/mupf)
+
+
+;; CORE-JS
+(defun custom-persp/core ()
+  (interactive)
+  (custom-persp "core-js"
+                (find-file "/finn/repo/common-web/trunk/core-js/")))
+
+(project-specifics "/finn/repo/common-web/trunk/core-js/"
+                   (common-web-mode 1)
+                   (setup-find-file-in-project))
+
+(define-key persp-mode-map (kbd "C-x p c") 'custom-persp/core)
