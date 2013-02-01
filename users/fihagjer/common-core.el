@@ -22,18 +22,18 @@
 
 (require 's)
 
-;;(defvar common-web-target-dir "/finn/svn/trunk/licensee-finn/finn/overlays/no.finntech.commons-web-*")
-(defvar common-web-target-dir "/finn/svn/trunk/licensee-finn/finn/target/exploded")
-(defun common-web-hot-deploy-buffer-file ()
+
+(defvar common-core-target-dir "/finn/svn/trunk/licensee-finn/finn/target/exploded")
+(defun common-core-hot-deploy-buffer-file ()
   "If the current buffer is visiting a file, and that file is deployed
 in an exploded war, re-deploy the file."
   (interactive)
   (let* ((source (buffer-file-name))
          (target (s-with source
-                   (s-replace "/finn/repo/common-web/trunk/commons-web/src/main/webapp" common-web-target-dir)
-                   (s-replace "/finn/repo/common-web/trunk/analytics-js/src/main/webapp" common-web-target-dir)
-                   (s-replace "/finn/repo/common-web/trunk/core-js/src/main/webapp" common-web-target-dir)
-                   (s-replace "/finn/repo/common-web/trunk/mupf-js/src/main/webapp" common-web-target-dir))))
+                   (s-replace "/finn/git/strapon-core-js/commons-web/src/main/webapp" common-core-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/analytics-js/src/main/webapp" common-core-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/core-js/src/main/webapp" common-core-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/mupf-js/src/main/webapp" common-core-target-dir))))
     (if (and (file-writable-p target)
              (not (string= source target)))
         (progn
@@ -41,16 +41,16 @@ in an exploded war, re-deploy the file."
           (message (concat "Deployed " source " to " target)))
       (message (concat target " does not exist, file not deployed")))))
 
-(define-minor-mode common-web-mode
+(define-minor-mode common-core-mode
   "Convenience utilities for working with Finn IAD"
   nil " IAD" nil
-  (if common-web-mode
-      (add-hook 'after-save-hook 'common-web-hot-deploy-buffer-file nil t)
-    (remove-hook 'after-save-hook 'common-web-hot-deploy-buffer-file t)))
+  (if common-core-mode
+      (add-hook 'after-save-hook 'common-core-hot-deploy-buffer-file nil t)
+    (remove-hook 'after-save-hook 'common-core-hot-deploy-buffer-file t)))
 
 (eval-after-load "grep"
   '(progn (add-to-list 'grep-find-ignored-directories "tinymce")
           (add-to-list 'grep-find-ignored-directories "external")))
 
-(provide 'common-web-mode)
+(provide 'common-core-mode)
 ;;; common-web-mode.el ends here

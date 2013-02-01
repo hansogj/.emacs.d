@@ -290,7 +290,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;fihagjer bindings
-(global-set-key (kbd "C-N") 'lookup-file)
+(global-set-key (kbd "C-c l") 'lookup-file)
 (global-set-key (kbd "M-∕") 'comment-current-line)
 (global-set-key (kbd "∕") 'insert-asterix)
 (global-set-key (quote [f6]) 'copy-whole-buffer)
