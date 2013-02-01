@@ -188,9 +188,14 @@
   (let* (file (buffer-file-name))
   (shell-command (concat "svn diff " file "| kompare -o -"))))
 
-(defun lookup-file (path file)
+(defun lookup-file2 (path file)
   (interactive "DPath: \nsFile: \n" )
   (find-dired path (concat "-type f -name '*" file "*'")))
+
+(defun lookup-file (path)
+  (interactive "Dpath: ")
+  (let ((ffip-project-root path))
+    (call-interactively 'find-file-in-project)))
 
 
 (defun comment-current-line()
@@ -204,9 +209,6 @@
   (interactive)
   (clipboard-kill-ring-save (point-min) (point-max)))
 
-(defun insert-asterix()
-  (interactive)
-  (insert "*"))
 
 ;;;;;;;;;;;;;;; TODO - fixit
 ;; Smart M-x is smart

@@ -13,6 +13,24 @@
   (ffip-local-excludes "target" "overlays")
   (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "pom.xml" "jsTestDriver.conf" "jawrBundle.properties"))
 
+;;File encodings
+(defun enforce-coding-system-priority ()
+  (let ((pref (car (coding-system-priority-list)))
+        (list (find-coding-systems-region (point-min) (point-max))))
+    (when (or (memq 'undecided list) (memq pref list))
+      (setq buffer-file-coding-system pref))))
+
+(defun iso-encode ()
+  (setq-default buffer-file-coding-system 'iso-8859-1)
+;;  (add-hook 'before-save-hook 'enforce-coding-system-priority)
+  (prefer-coding-system 'iso-8859-1)
+  (setq locale-coding-system 'iso-8859-1) ; pretty
+  (set-terminal-coding-system 'iso-8859-1) ; pretty
+  (set-keyboard-coding-system 'iso-8859-1) ; pretty
+  (set-selection-coding-system 'iso-8859-1)) ; please
+;;end file encodings
+
+
 ;; Emacs
 (defun custom-persp/emacs ()
   (interactive)
@@ -34,6 +52,7 @@
 
 (project-specifics "/finn/svn/trunk"
                    (iad-mode 1)
+                   (iso-encode)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p f") 'custom-persp/finn)
@@ -47,6 +66,7 @@
 
 (project-specifics "/finn/svn/trunk/minfinn"
                    (iad-mode 1)
+                   (iso-encode)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p p") 'custom-persp/minfinn)
@@ -56,10 +76,10 @@
 (defun custom-persp/commons-web ()
   (interactive)
   (custom-persp "commons-web"
-                (find-file "/finn/repo/common-web/trunk/commons-web/")))
+                (find-file "/finn/git/strapon-core-js/commons-web/")))
 
-(project-specifics "/finn/repo/common-web/trunk/commons-web/"
-                   (common-web-mode 1)
+(project-specifics "/finn/git/strapon-core-js/commons-web/"
+                   (common-core-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p w") 'custom-persp/commons-web)
@@ -68,10 +88,10 @@
 (defun custom-persp/mupf ()
   (interactive)
   (custom-persp "mupf-js"
-                (find-file "/finn/repo/common-web/trunk/mupf-js/")))
+                (find-file "/finn/git/strapon-core-js/mupf-js/")))
 
-(project-specifics "/finn/repo/common-web/trunk/mupf-js/"
-                   (common-web-mode 1)
+(project-specifics "/finn/git/strapon-core-js/mupf-js/"
+                   (common-core-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p m") 'custom-persp/mupf)
@@ -81,10 +101,10 @@
 (defun custom-persp/core ()
   (interactive)
   (custom-persp "core-js"
-                (find-file "/finn/repo/common-web/trunk/core-js/")))
+                (find-file "/finn/git/strapon-core-js/core-js/")))
 
-(project-specifics "/finn/repo/common-web/trunk/core-js/"
-                   (common-web-mode 1)
+(project-specifics "/finn/git/strapon-core-js/core-js/"
+                   (common-core-mode 1)
                    (setup-find-file-in-project))
 
 (define-key persp-mode-map (kbd "C-x p c") 'custom-persp/core)
