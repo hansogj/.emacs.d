@@ -69,6 +69,7 @@
                    (iso-encode)
                    (setup-find-file-in-project))
 
+
 (define-key persp-mode-map (kbd "C-x p p") 'custom-persp/minfinn)
 
 

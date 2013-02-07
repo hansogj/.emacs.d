@@ -41,12 +41,30 @@ in an exploded war, re-deploy the file."
           (message (concat "Deployed " source " to " target)))
       (message (concat target " does not exist, file not deployed")))))
 
+(defun amd-builder ()
+  "If in an amd-module, autorun bash-command to build amd-require module and deploy it to target"
+  (interactive)
+  (setq source (buffer-file-name))
+
+  (setq is-amd  (s-matches? "clientscript/finn/amd" source ))
+;;  (message (concat source " ::: " is-amd " ::: " (equal is-amd nil)))
+  (if (equal is-amd t)
+      (message "source matcing")
+    (progn
+      (setq output (shell-command-to-string "amdBuilder"))
+      (message output))))
+
+
 (define-minor-mode iad-mode
   "Convenience utilities for working with Finn IAD"
   nil " IAD" nil
   (if iad-mode
       (add-hook 'after-save-hook 'iad-hot-deploy-buffer-file nil t)
-    (remove-hook 'after-save-hook 'iad-hot-deploy-buffer-file t)))
+    (remove-hook 'after-save-hook 'iad-hot-deploy-buffer-file t))
+
+  (if iad-mode
+      (add-hook 'after-save-hook 'amd-builder nil t)
+    (remove-hook 'after-save-hook 'amd-builder t)))
 
 (eval-after-load "grep"
   '(progn (add-to-list 'grep-find-ignored-directories "tinymce")
