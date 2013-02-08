@@ -11,7 +11,7 @@
 
 (defun setup-find-file-in-project ()
   (ffip-local-excludes "target" "overlays")
-  (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "pom.xml" "jsTestDriver.conf" "jawrBundle.properties"))
+  (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "tiles*.xml" "pom.xml" "jsTestDriver.conf" "jawrbundle.properties"))
 
 ;;File encodings
 (defun enforce-coding-system-priority ()
@@ -68,8 +68,6 @@
                    (iad-mode 1)
                    (iso-encode)
                    (setup-find-file-in-project))
-
-
 (define-key persp-mode-map (kbd "C-x p p") 'custom-persp/minfinn)
 
 

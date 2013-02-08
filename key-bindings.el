@@ -294,6 +294,8 @@
 (global-set-key (kbd "M-∕") 'comment-current-line)
 (global-set-key (kbd "∕") 'insert-asterix)
 (global-set-key (quote [f6]) 'copy-whole-buffer)
+(global-set-key (kbd "C-x v e") 'vc-ediff)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'key-bindings)
