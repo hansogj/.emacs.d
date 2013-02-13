@@ -134,7 +134,9 @@
 (require 'browse-kill-ring)
 (setq browse-kill-ring-quit-action 'save-and-restore)
 
-
+;; Smart M-x is smart
+(require 'smex)
+;;(smex-initialize)
 
 ;; Setup key bindings
 (require 'key-bindings)
@@ -208,9 +210,3 @@
   "Copy entire buffer to clipboard"
   (interactive)
   (clipboard-kill-ring-save (point-min) (point-max)))
-
-
-;;;;;;;;;;;;;;; TODO - fixit
-;; Smart M-x is smart
-;;(require 'smex)
-;;(smex-initialize)

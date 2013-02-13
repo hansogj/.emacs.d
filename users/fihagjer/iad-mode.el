@@ -47,7 +47,7 @@ in an exploded war, re-deploy the file."
   (setq source (buffer-file-name))
   (when (s-matches? "clientscript/finn/amd" source)
     (message "source matcing")
-    (setq output (shell-command-to-string "amdBuilder"))
+    (setq output (shell-command-to-string "amd-builder"))
     (message output)
     (message "amd module built and deployed")))
 

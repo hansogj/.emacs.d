@@ -57,7 +57,6 @@
 
 (define-key persp-mode-map (kbd "C-x p f") 'custom-persp/finn)
 
-
 ;; MinFinn
 (defun custom-persp/minfinn ()
   (interactive)
@@ -70,40 +69,14 @@
                    (setup-find-file-in-project))
 (define-key persp-mode-map (kbd "C-x p p") 'custom-persp/minfinn)
 
-
-;; COMMONS-WEB
-(defun custom-persp/commons-web ()
+;; strapon-core
+(defun custom-persp/strapon-core ()
   (interactive)
-  (custom-persp "commons-web"
-                (find-file "/finn/git/strapon-core-js/commons-web/")))
+  (custom-persp "strapon-core-js"
+                (find-file "/finn/git/strapon-core-js/")))
 
-(project-specifics "/finn/git/strapon-core-js/commons-web/"
+(project-specifics "/finn/git/strapon-core-js/"
                    (common-core-mode 1)
                    (setup-find-file-in-project))
 
-(define-key persp-mode-map (kbd "C-x p w") 'custom-persp/commons-web)
-
-;; MUPF-JS
-(defun custom-persp/mupf ()
-  (interactive)
-  (custom-persp "mupf-js"
-                (find-file "/finn/git/strapon-core-js/mupf-js/")))
-
-(project-specifics "/finn/git/strapon-core-js/mupf-js/"
-                   (common-core-mode 1)
-                   (setup-find-file-in-project))
-
-(define-key persp-mode-map (kbd "C-x p m") 'custom-persp/mupf)
-
-
-;; CORE-JS
-(defun custom-persp/core ()
-  (interactive)
-  (custom-persp "core-js"
-                (find-file "/finn/git/strapon-core-js/core-js/")))
-
-(project-specifics "/finn/git/strapon-core-js/core-js/"
-                   (common-core-mode 1)
-                   (setup-find-file-in-project))
-
-(define-key persp-mode-map (kbd "C-x p c") 'custom-persp/core)
+(define-key persp-mode-map (kbd "C-x p s") 'custom-persp/strapon-core)
