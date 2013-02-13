@@ -33,7 +33,7 @@ in an exploded war, re-deploy the file."
                    (s-replace "/finn/git/strapon-core-js/commons-web/src/main/webapp" common-core-target-dir)
                    (s-replace "/finn/git/strapon-core-js/analytics-js/src/main/webapp" common-core-target-dir)
                    (s-replace "/finn/git/strapon-core-js/core-js/src/main/webapp" common-core-target-dir)
-                   (s-replace "/finn/git/strapon-core-js/mupf-js/src/main/webapp" common-core-target-dir))))
+                   (s-replace "/finn/git/strapon-core-js/mupf-js/src/main/webapp" common-core-target-dir)
                    (s-replace "/finn/git/strapon-core-js/user-js/src/main/webapp" common-core-target-dir))))
     (if (and (file-writable-p target)
              (not (string= source target)))
