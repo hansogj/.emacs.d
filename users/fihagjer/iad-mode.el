@@ -51,14 +51,23 @@ in an exploded war, re-deploy the file."
     (message output)
     (message "amd module built and deployed")))
 
+
+
+
 (define-minor-mode iad-mode
   "Convenience utilities for working with Finn IAD"
   nil " IAD" nil
   (if iad-mode
-      (add-hook 'after-save-hook 'iad-hot-deploy-buffer-file nil t)
-    (add-hook 'after-save-hook 'amd-builder nil t)
-    (remove-hook 'after-save-hook 'iad-hot-deploy-buffer-file t)
-    (remove-hook 'after-save-hook 'amd-builder t)))
+
+      (add-hook 'after-save-hook (lambda ()
+                                   (iad-hot-deploy-buffer-file)
+                                   (amd-builder)) nil t)
+    (remove-hook 'after-save-hook (lambda ()
+                                    (iad-hot-deploy-buffer-file)
+                                    (amd-builder)) t)))
+;;    (message "\nafter-save-hook-amd\n")
+;;    (add-hook 'after-save-hook-amd 'amd-builder nil t)
+;;    (remove-hook 'after-save-hook-amd 'amd-builder t)))
 
 (eval-after-load "grep"
   '(progn (add-to-list 'grep-find-ignored-directories "tinymce")

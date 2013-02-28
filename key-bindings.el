@@ -295,6 +295,7 @@
 (global-set-key (kbd "∕") 'insert-asterix)
 (global-set-key (quote [f6]) 'copy-whole-buffer)
 (global-set-key (kbd "C-x v e") 'vc-ediff)
+(global-set-key (kbd "C-+") 'enlarge-font)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
