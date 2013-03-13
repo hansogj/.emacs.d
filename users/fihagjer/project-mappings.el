@@ -40,10 +40,6 @@
 (project-specifics ".emacs.d"
                    (ffip-local-excludes "swank")
                    (ffip-local-patterns "*.el" "*.md" "*.org"))
-
-(define-key persp-mode-map (kbd "C-x p e") 'custom-persp/emacs)
-
-
 ;; FINN
 (defun custom-persp/finn ()
   (interactive)
@@ -54,9 +50,6 @@
                    (iad-mode 1)
                    (iso-encode)
                    (setup-find-file-in-project))
-
-(define-key persp-mode-map (kbd "C-x p f") 'custom-persp/finn)
-
 ;; MinFinn
 (defun custom-persp/minfinn ()
   (interactive)
@@ -67,8 +60,6 @@
                    (iad-mode 1)
                    (iso-encode)
                    (setup-find-file-in-project))
-(define-key persp-mode-map (kbd "C-x p p") 'custom-persp/minfinn)
-
 ;; strapon-core
 (defun custom-persp/strapon-core ()
   (interactive)
@@ -78,5 +69,26 @@
 (project-specifics "/finn/git/strapon-core-js/"
                    (common-core-mode 1)
                    (setup-find-file-in-project))
+;; strapon-core
+(defun custom-persp/mupf ()
+  (interactive)
+  (custom-persp "mupf-js"
+                (find-file "/finn/git/mupf-js/")))
 
-(define-key persp-mode-map (kbd "C-x p s") 'custom-persp/strapon-core)
+(project-specifics "/finn/git/mupf-js/"
+                   (common-core-mode 1)
+                   (setup-find-file-in-project))
+
+
+(define-key persp-mode-map (kbd "C-x p e") '(lambda () (interactive) (set-background-color "black") (custom-persp/emacs)))
+
+(define-key persp-mode-map (kbd "C-x p f") '(lambda () (interactive) (set-background-color "black") (custom-persp/finn)))
+(define-key persp-mode-map (kbd "C-x p p") '(lambda () (interactive) (set-background-color "black") (custom-persp/minfinn)))
+(define-key persp-mode-map (kbd "C-x p s") '(lambda () (interactive) (set-background-color "black") (custom-persp/strapon-core)))
+(define-key persp-mode-map (kbd "C-x p m") '(lambda () (interactive) (set-background-color "black") (custom-persp/mupf)))
+
+(defvar bg-color-branched "dark slate gray")
+(define-key persp-mode-map (kbd "C-x p b f") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/finn)))
+(define-key persp-mode-map (kbd "C-x p b p") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/minfinn)))
+(define-key persp-mode-map (kbd "C-x p b s") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/strapon-core)))
+(define-key persp-mode-map (kbd "C-x p b m") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/mupf)))
