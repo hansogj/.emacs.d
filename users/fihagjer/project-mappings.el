@@ -79,13 +79,23 @@
                    (common-core-mode 1)
                    (setup-find-file-in-project))
 
+;;mfinn
+(defun custom-persp/mfinn ()
+  (interactive)
+  (custom-persp "mfinn"
+                (find-file "/finn/git/mfinn/")))
+
+  (project-specifics "/finn/git/mfinn/"
+                     (mfinn-mode 1)
+                     (setup-find-file-in-project))
+
 
 (define-key persp-mode-map (kbd "C-x p e") '(lambda () (interactive) (set-background-color "black") (custom-persp/emacs)))
-
 (define-key persp-mode-map (kbd "C-x p f") '(lambda () (interactive) (set-background-color "black") (custom-persp/finn)))
 (define-key persp-mode-map (kbd "C-x p p") '(lambda () (interactive) (set-background-color "black") (custom-persp/minfinn)))
 (define-key persp-mode-map (kbd "C-x p s") '(lambda () (interactive) (set-background-color "black") (custom-persp/strapon-core)))
 (define-key persp-mode-map (kbd "C-x p m") '(lambda () (interactive) (set-background-color "black") (custom-persp/mupf)))
+(define-key persp-mode-map (kbd "C-x p n") '(lambda () (interactive) (set-background-color "black") (custom-persp/mfinn)))
 
 (defvar bg-color-branched "dark slate gray")
 (define-key persp-mode-map (kbd "C-x p b f") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/finn)))
