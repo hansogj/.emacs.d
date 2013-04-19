@@ -44,21 +44,21 @@
 (defun custom-persp/finn ()
   (interactive)
   (custom-persp "finn"
-                (find-file "/finn/svn/trunk")))
+                (find-file "/finn/git/iad")))
 
-(project-specifics "/finn/svn/trunk"
+(project-specifics "/finn/git/iad"
                    (iad-mode 1)
-                   (iso-encode)
+;;                   (iso-encode)
                    (setup-find-file-in-project))
 ;; MinFinn
 (defun custom-persp/minfinn ()
   (interactive)
   (custom-persp "minfinn"
-                (find-file "/finn/svn/trunk/minfinn")))
+                (find-file "/finn/git/iad/minfinn")))
 
-(project-specifics "/finn/svn/trunk/minfinn"
+(project-specifics "/finn/git/iad/minfinn"
                    (iad-mode 1)
-                   (iso-encode)
+;;                   (iso-encode)
                    (setup-find-file-in-project))
 ;; strapon-core
 (defun custom-persp/strapon-core ()
@@ -69,7 +69,7 @@
 (project-specifics "/finn/git/strapon-core-js/"
                    (common-core-mode 1)
                    (setup-find-file-in-project))
-;; strapon-core
+;; mupf-core
 (defun custom-persp/mupf ()
   (interactive)
   (custom-persp "mupf-js"
