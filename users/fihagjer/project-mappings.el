@@ -1,3 +1,5 @@
+(require 'cl)
+
 (defmacro project-specifics (name &rest body)
   `(progn
      (add-hook 'find-file-hook
@@ -13,92 +15,51 @@
   (ffip-local-excludes "target" "overlays")
   (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "tiles*.xml" "pom.xml" "jsTestDriver.conf" "jawrbundle.properties"))
 
-;;File encodings
-(defun enforce-coding-system-priority ()
-  (let ((pref (car (coding-system-priority-list)))
-        (list (find-coding-systems-region (point-min) (point-max))))
-    (when (or (memq 'undecided list) (memq pref list))
-      (setq buffer-file-coding-system pref))))
-
-(defun iso-encode ()
-  (setq-default buffer-file-coding-system 'iso-8859-1)
-;;  (add-hook 'before-save-hook 'enforce-coding-system-priority)
-  (prefer-coding-system 'iso-8859-1)
-  (setq locale-coding-system 'iso-8859-1) ; pretty
-  (set-terminal-coding-system 'iso-8859-1) ; pretty
-  (set-keyboard-coding-system 'iso-8859-1) ; pretty
-  (set-selection-coding-system 'iso-8859-1)) ; please
-;;end file encodings
-
-
 ;; Emacs
 (defun custom-persp/emacs ()
   (interactive)
   (custom-persp "emacs"
+                (set-background-color "black")
                 (find-file "~/.emacs.d/init.el")))
 
 (project-specifics ".emacs.d"
-                   (ffip-local-excludes "swank")
-                   (ffip-local-patterns "*.el" "*.md" "*.org"))
+  (ffip-local-excludes "swank")
+  (ffip-local-patterns "*.el" "*.md" "*.org"))
 ;; FINN
-(defun custom-persp/finn ()
-  (interactive)
-  (custom-persp "finn"
-                (find-file "/finn/git/iad")))
-
-(project-specifics "/finn/git/iad"
-                   (iad-mode 1)
-;;                   (iso-encode)
-                   (setup-find-file-in-project))
-;; MinFinn
-(defun custom-persp/minfinn ()
-  (interactive)
-  (custom-persp "minfinn"
-                (find-file "/finn/git/iad/minfinn")))
-
-(project-specifics "/finn/git/iad/minfinn"
-                   (iad-mode 1)
-;;                   (iso-encode)
-                   (setup-find-file-in-project))
-;; strapon-core
-(defun custom-persp/strapon-core ()
-  (interactive)
-  (custom-persp "strapon-core-js"
-                (find-file "/finn/git/strapon-core-js/")))
-
-(project-specifics "/finn/git/strapon-core-js/"
-                   (common-core-mode 1)
-                   (setup-find-file-in-project))
-;; mupf-core
-(defun custom-persp/mupf ()
-  (interactive)
-  (custom-persp "mupf-js"
-                (find-file "/finn/git/mupf-js/")))
-
-(project-specifics "/finn/git/mupf-js/"
-                   (common-core-mode 1)
-                   (setup-find-file-in-project))
-
-;;mfinn
-(defun custom-persp/mfinn ()
-  (interactive)
-  (custom-persp "mfinn"
-                (find-file "/finn/git/mfinn/")))
-
-  (project-specifics "/finn/git/mfinn/"
-                     (mfinn-mode 1)
-                     (setup-find-file-in-project))
 
 
-(define-key persp-mode-map (kbd "C-x p e") '(lambda () (interactive) (set-background-color "black") (custom-persp/emacs)))
-(define-key persp-mode-map (kbd "C-x p f") '(lambda () (interactive) (set-background-color "black") (custom-persp/finn)))
-(define-key persp-mode-map (kbd "C-x p p") '(lambda () (interactive) (set-background-color "black") (custom-persp/minfinn)))
-(define-key persp-mode-map (kbd "C-x p s") '(lambda () (interactive) (set-background-color "black") (custom-persp/strapon-core)))
-(define-key persp-mode-map (kbd "C-x p m") '(lambda () (interactive) (set-background-color "black") (custom-persp/mupf)))
-(define-key persp-mode-map (kbd "C-x p n") '(lambda () (interactive) (set-background-color "black") (custom-persp/mfinn)))
+(defmacro def-finn-project-with-branch (shortcut name)
+  `(progn
 
-(defvar bg-color-branched "dark slate gray")
-(define-key persp-mode-map (kbd "C-x p b f") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/finn)))
-(define-key persp-mode-map (kbd "C-x p b p") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/minfinn)))
-(define-key persp-mode-map (kbd "C-x p b s") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/strapon-core)))
-(define-key persp-mode-map (kbd "C-x p b m") '(lambda () (interactive) (set-background-color bg-color-branched) (custom-persp/mupf)))
+     (defun ,(intern (concat "custom-persp/" name)) ()
+       (interactive)
+       (custom-persp ,name
+                     (set-background-color "black")
+                     (find-file ,(concat "/finn/git/" name "/"))))
+
+     (defun ,(intern (concat "custom-persp/" name "-branched")) ()
+       (interactive)
+       (message (string= "iad" ,name))
+       (custom-persp ,name
+                     (set-background-color "RosyBrown4")
+                     (find-file ,(concat "/finn/git/" name "/"))))
+
+     (project-specifics ,(concat "/finn/git/" name "/")
+
+       (case ,name
+         ("iad"  (iad-mode 1))
+         ("mfinn" (mfinn-mode 1))
+         (otherwise module-mode 1))
+
+       (setup-find-file-in-project))
+
+     (define-key persp-mode-map (kbd ,(concat "C-x p " shortcut)) ',(intern (concat "custom-persp/" name)))
+     (define-key persp-mode-map (kbd ,(concat "C-x p b " shortcut)) ',(intern (concat "custom-persp/" name "-branched")))))
+
+(def-finn-project-with-branch "i" "iad")
+(def-finn-project-with-branch "m" "mupf-js")
+(def-finn-project-with-branch "n" "mfinn")
+(def-finn-project-with-branch "s" "strapon-core-js")
+(def-finn-project-with-branch "w" "strapon-java-web")
+
+(define-key persp-mode-map (kbd "C-x p e") 'custom-persp/emacs)

@@ -21,20 +21,22 @@
 ;;; Code:
 
 (require 's)
+(message "setting module-mode")
 
 
-(defvar common-core-target-dir "/finn/svn/trunk/licensee-finn/finn/target/exploded")
-(defun common-core-hot-deploy-buffer-file ()
+(defvar module-target-dir "/finn/git/iad/licensee-finn/finn/target/exploded")
+(defun module-hot-deploy-buffer-file ()
   "If the current buffer is visiting a file, and that file is deployed
 in an exploded war, re-deploy the file."
   (interactive)
   (let* ((source (buffer-file-name))
          (target (s-with source
-                   (s-replace "/finn/git/strapon-core-js/commons-web/src/main/webapp" common-core-target-dir)
-                   (s-replace "/finn/git/strapon-core-js/analytics-js/src/main/webapp" common-core-target-dir)
-                   (s-replace "/finn/git/strapon-core-js/core-js/src/main/webapp" common-core-target-dir)
-                   (s-replace "/finn/git/strapon-core-js/user-js/src/main/webapp" common-core-target-dir)
-                   (s-replace "/finn/git/mupf-js/src/main/webapp" common-core-target-dir))))
+                   (s-replace "/finn/git/strapon-core-js/commons-web/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/analytics-js/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/core-js/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/user-js/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-java-web/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/mupf-js/src/main/webapp" module-target-dir))))
     (if (and (file-writable-p target)
              (not (string= source target)))
         (progn
@@ -52,20 +54,19 @@ in an exploded war, re-deploy the file."
     (message output)
     (message "amd module built and deployed")))
 
-(define-minor-mode common-core-mode
+(define-minor-mode module-mode
   "Convenience utilities for working with Finn IAD"
   nil " IAD" nil
-  (if common-core-mode
+  (if module-mode
   (add-hook 'after-save-hook (lambda ()
-                               (common-core-hot-deploy-buffer-file)
+                               (module-hot-deploy-buffer-file)
                                (amd-builder)) nil t)
   (remove-hook 'after-save-hook (lambda ()
-                                  (common-core-hot-deploy-buffer-file)
+                                  (module-hot-deploy-buffer-file)
                                   (amd-builder)) t)))
 
 (eval-after-load "grep"
   '(progn (add-to-list 'grep-find-ignored-directories "tinymce")
           (add-to-list 'grep-find-ignored-directories "external")))
 
-(provide 'common-core-mode)
-;;; common-web-mode.el ends here
+(provide 'module-mode)
