@@ -6,6 +6,10 @@
 ;; Completion that uses many different methods to find options.
 (global-set-key (kbd "C-.") 'hippie-expand-no-case-fold)
 (global-set-key (kbd "C-:") 'hippie-expand-lines)
+(global-set-key (kbd "C-,") 'completion-at-point)
+
+(require 'misc)
+(global-set-key (kbd "s-.") 'copy-from-above-command)
 
 ;; Smart M-x
 ;;(global-set-key (kbd "M-x") 'smex)
@@ -38,6 +42,13 @@
 (global-set-key (kbd "s-Å") 'mc/mark-previous-symbol-like-this)
 (global-set-key (kbd "M-s-Æ") 'mc/mark-all-symbols-like-this)
 
+;; Extra multiple cursors stuff
+(global-set-key (kbd "C-~") 'mc/reverse-regions)
+(global-set-key (kbd "M-~") 'mc/sort-regions)
+(global-set-key (kbd "H-~") 'mc/insert-numbers)
+
+(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+
 ;; Set anchor to start rectangular-region-mode
 (global-set-key (kbd "H-SPC") 'set-rectangular-region-anchor)
 
@@ -60,6 +71,8 @@
 ;; Use shell-like backspace C-h, rebind help to F1
 (define-key key-translation-map [?\C-h] [?\C-?])
 (global-set-key (kbd "<f1>") 'help-command)
+
+(global-set-key (kbd "M-h") 'kill-region-or-backward-word)
 
 ;; Transpose stuff with M-t
 (global-unset-key (kbd "M-t")) ;; which used to be transpose-words
@@ -87,15 +100,22 @@
 
 ;; Zap to char
 (global-set-key (kbd "M-z") 'zap-up-to-char)
+(global-set-key (kbd "s-z") (lambda (char) (interactive "cZap up to char backwards: ") (zap-up-to-char -1 char)))
+
 (global-set-key (kbd "M-Z") 'zap-to-char)
+(global-set-key (kbd "s-Z") (lambda (char) (interactive "cZap to char backwards: ") (zap-to-char -1 char)))
 
 ;; iy-go-to-char - like f in Vim
 (global-set-key (kbd "M-m") 'jump-char-forward)
 (global-set-key (kbd "M-M") 'jump-char-backward)
+(global-set-key (kbd "s-m") 'jump-char-backward)
 
 ;; vim's ci and co commands
 (global-set-key (kbd "M-I") 'change-inner)
 (global-set-key (kbd "M-O") 'change-outer)
+
+(global-set-key (kbd "s-i") 'copy-inner)
+(global-set-key (kbd "s-o") 'copy-outer)
 
 ;; Create new frame
 (define-key global-map (kbd "C-x C-n") 'make-frame-command)
@@ -113,6 +133,14 @@
 (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; toggle two most recent buffers
+(fset 'quick-switch-buffer [?\C-x ?b return])
+(global-set-key (kbd "s-j") 'quick-switch-buffer)
+
+;; Revert without any fuss
+(global-set-key (kbd "M-<escape>")
+                (lambda () (interactive) (revert-buffer t t)))
+
 ;; Edit file with sudo
 (global-set-key (kbd "M-s e") 'sudo-edit)
 
@@ -124,6 +152,8 @@
 (global-set-key (kbd "C-x -") 'rotate-windows)
 (global-set-key (kbd "C-x C--") 'toggle-window-split)
 (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
+
+(global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
 
 ;; Add region to *multifile*
 (global-set-key (kbd "C-!") 'mf/mirror-region-in-multifile)
@@ -169,12 +199,15 @@
 (global-set-key (kbd "C-S-r") 'isearch-backward)
 
 ;; Move more quickly
-(global-set-key (kbd "C-S-n") (lambda () (interactive) (next-line 5)))
-(global-set-key (kbd "C-S-p") (lambda () (interactive) (previous-line 5)))
-(global-set-key (kbd "C-S-f") (lambda () (interactive) (forward-char 5)))
-(global-set-key (kbd "C-S-b") (lambda () (interactive) (backward-char 5)))
-;; Convenience on ThinkPad Keyboard: Use back/forward as pg up/down
+(global-set-key (kbd "C-S-n") (lambda () (interactive) (ignore-errors (next-line 5))))
+(global-set-key (kbd "C-S-p") (lambda () (interactive) (ignore-errors (previous-line 5))))
+(global-set-key (kbd "C-S-f") (lambda () (interactive) (ignore-errors (forward-char 5))))
+(global-set-key (kbd "C-S-b") (lambda () (interactive) (ignore-errors (backward-char 5))))
 
+(global-set-key (kbd "H-*") 'beginning-of-buffer) ;; H-p
+(global-set-key (kbd "H-n") 'end-of-buffer)
+
+;; Convenience on ThinkPad Keyboard: Use back/forward as pg up/down
 (global-set-key (kbd "<XF86Back>") 'scroll-down)
 (global-set-key (kbd "<XF86Forward>") 'scroll-up)
 (global-set-key (kbd "<XF86WakeUp>") 'beginning-of-buffer)
@@ -190,7 +223,7 @@
 (global-set-key (kbd "C-c u") 'uncomment-region)
 
 ;; Eval buffer
-(global-set-key (kbd "C-c v") 'eval-buffer)
+(global-set-key (kbd "C-c C-k") 'eval-buffer)
 
 ;; Create scratch buffer
 (global-set-key (kbd "C-c b") 'create-scratch-buffer)
@@ -280,6 +313,9 @@
 (global-set-key (kbd "C-x C-o ph") (ffip-create-pattern-file-finder "*.php"))
 (global-set-key (kbd "C-x C-o tx") (ffip-create-pattern-file-finder "*.txt"))
 (global-set-key (kbd "C-x C-o vm") (ffip-create-pattern-file-finder "*.vm"))
+(global-set-key (kbd "C-x C-o xm") (ffip-create-pattern-file-finder "*.xml"))
+(global-set-key (kbd "C-x C-o pr") (ffip-create-pattern-file-finder "*.properties"))
+(global-set-key (kbd "C-x C-o in") (ffip-create-pattern-file-finder "*.ini"))
 
 ;; View occurrence in occur mode
 (define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)

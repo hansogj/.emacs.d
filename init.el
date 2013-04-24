@@ -59,6 +59,8 @@
    (cons 'move-text melpa)
    (cons 'gist melpa)
    (cons 'htmlize melpa)
+   (cons 'visual-regexp melpa)
+   (cons 'smartparens melpa)
    (cons 'elisp-slime-nav melpa)
    ;(cons 'elnode marmalade)
    (cons 'slime-js marmalade)
@@ -66,7 +68,6 @@
    (cons 'gitconfig-mode melpa)
    (cons 'gitignore-mode melpa)
    (cons 'clojure-mode melpa)
-   (cons 'clojure-test-mode melpa)
    (cons 'nrepl melpa)))
 
 (condition-case nil
@@ -95,6 +96,9 @@
 (require 'setup-html-mode)
 (require 'setup-paredit)
 
+;; Default setup of smartparens
+(require 'smartparens-config)
+
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
 (eval-after-load 'ruby-mode '(require 'setup-ruby-mode))
@@ -107,6 +111,17 @@
 
 ;; Map files to modes
 (require 'mode-mappings)
+
+;; Visual regexp
+(require 'visual-regexp)
+(define-key global-map (kbd "M-&") 'vr/query-replace)
+(define-key global-map (kbd "M-/") 'vr/replace)
+
+;; Tern.js
+
+(add-to-list 'load-path (expand-file-name "tern/emacs" site-lisp-dir))
+(autoload 'tern-mode "tern.el" nil t)
+(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 
 ;; Functions (load all files in defuns-dir)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -142,13 +157,20 @@
 (require 'key-bindings)
 
 ;; Misc
+(require 'project-archetypes)
 (require 'appearance)
 (require 'my-misc)
 (when is-mac (require 'mac))
 
+;; Diminish modeline clutter
+(require 'diminish)
+(diminish 'yas/minor-mode)
+(diminish 'eldoc-mode)
+(diminish 'paredit-mode)
+
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
-(add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t)))
+(add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
 (eval-after-load 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))
 
 ;; Email, baby
@@ -162,10 +184,6 @@
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
-
-;; Diminish modeline clutter
-(require 'diminish)
-(diminish 'yas/minor-mode)
 
 ;; Conclude init by setting up specifics for the current user
 (when (file-exists-p user-settings-dir)
