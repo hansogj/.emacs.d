@@ -46,10 +46,18 @@
 
      (project-specifics ,(concat "/finn/git/" name "/")
 
-       (case ,name
-         ("iad"  (iad-mode 1))
-         ("mfinn" (mfinn-mode 1))
-         (otherwise module-mode 1))
+       (cond
+        ((string= ,name "iad")
+         (iad-mode 1))
+        ((string= ,name "mfinn")
+         (mfinn-mode 1))
+        (t
+         (module-mode 1)))
+
+       ;; (case ,name
+       ;;   ("iad"  (iad-mode 1))
+       ;;   ("mfinn" (mfinn-mode 1))
+       ;;   (otherwise module-mode 1))
 
        (setup-find-file-in-project))
 

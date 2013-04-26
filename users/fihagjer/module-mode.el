@@ -21,8 +21,6 @@
 ;;; Code:
 
 (require 's)
-(message "setting module-mode")
-
 
 (defvar module-target-dir "/finn/git/iad/licensee-finn/finn/target/exploded")
 (defun module-hot-deploy-buffer-file ()
@@ -58,12 +56,12 @@ in an exploded war, re-deploy the file."
   "Convenience utilities for working with Finn IAD"
   nil " IAD" nil
   (if module-mode
-  (add-hook 'after-save-hook (lambda ()
-                               (module-hot-deploy-buffer-file)
-                               (amd-builder)) nil t)
-  (remove-hook 'after-save-hook (lambda ()
-                                  (module-hot-deploy-buffer-file)
-                                  (amd-builder)) t)))
+      (add-hook 'after-save-hook (lambda ()
+                                   (module-hot-deploy-buffer-file)
+                                   (amd-builder)) nil t)
+    (remove-hook 'after-save-hook (lambda ()
+                                    (module-hot-deploy-buffer-file)
+                                    (amd-builder)) t)))
 
 (eval-after-load "grep"
   '(progn (add-to-list 'grep-find-ignored-directories "tinymce")
