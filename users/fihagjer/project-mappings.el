@@ -13,7 +13,7 @@
 
 (defun setup-find-file-in-project ()
   (ffip-local-excludes "target" "overlays")
-  (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "tiles*.xml" "pom.xml" "jsTestDriver.conf" "jawrbundle.properties"))
+  (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "tiles*.xml" "pom.xml" "jsTestDriver.conf" "jawrbundle.properties" "*.rb" "*.feature"))
 
 ;; Emacs
 (defun custom-persp/emacs ()
@@ -25,8 +25,18 @@
 (project-specifics ".emacs.d"
   (ffip-local-excludes "swank")
   (ffip-local-patterns "*.el" "*.md" "*.org"))
-;; FINN
 
+;; cucumber
+(defun custom-persp/stories-framework ()
+  (interactive)
+  (custom-persp "stories-framework"
+                (set-background-color "black")
+                (find-file "/finn/git/stories-framework/")))
+
+(project-specifics "/finn/git/stories-framework/"
+  (setup-find-file-in-project))
+
+;; FINN
 
 (defmacro def-finn-project-with-branch (shortcut name)
   `(progn
@@ -71,3 +81,4 @@
 (def-finn-project-with-branch "w" "strapon-java-web")
 
 (define-key persp-mode-map (kbd "C-x p e") 'custom-persp/emacs)
+(define-key persp-mode-map (kbd "C-x p c") 'custom-persp/stories-framework)
