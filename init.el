@@ -14,6 +14,13 @@
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path site-lisp-dir)
 
+;; Keep emacs Custom-settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+
+;; Set up appearance early
+(require 'appearance)
+
 ;; Settings for currently logged in user
 (setq user-settings-dir
       (concat user-emacs-directory "users/" user-login-name))
@@ -23,10 +30,6 @@
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
   (when (file-directory-p project)
     (add-to-list 'load-path project)))
-
-;; Keep emacs Custom-settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
 
 ;; Write backup files to own directory
 (setq backup-directory-alist
@@ -44,31 +47,29 @@
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
 
-;; Setup elnode before packages to stop it from starting a server
-;;(require 'setup-elnode)
-
 ;; Setup packages
 (require 'setup-package)
 
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
-   (cons 'exec-path-from-shell melpa)
-   (cons 'magit melpa)
-   (cons 'paredit melpa)
-   (cons 'move-text melpa)
-   (cons 'gist melpa)
-   (cons 'htmlize melpa)
-   (cons 'visual-regexp melpa)
-   (cons 'smartparens melpa)
-   (cons 'elisp-slime-nav melpa)
-   ;(cons 'elnode marmalade)
-   (cons 'slime-js marmalade)
-   (cons 'git-commit-mode melpa)
-   (cons 'gitconfig-mode melpa)
-   (cons 'gitignore-mode melpa)
-   (cons 'clojure-mode melpa)
-   (cons 'nrepl melpa)))
+   '(exec-path-from-shell
+     magit
+     paredit
+     move-text
+     gist
+     htmlize
+     visual-regexp
+     smartparens
+     ido-vertical-mode
+     simple-httpd
+     restclient
+     elisp-slime-nav
+     git-commit-mode
+     gitconfig-mode
+     gitignore-mode
+     clojure-mode
+     nrepl)))
 
 (condition-case nil
     (init--install-packages)
@@ -98,6 +99,7 @@
 
 ;; Default setup of smartparens
 (require 'smartparens-config)
+(setq sp-autoescape-string-quote nil)
 
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
@@ -105,9 +107,12 @@
 (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
 (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
 
-;; Load slime-js when asked for
-(autoload 'slime-js-jack-in-browser "setup-slime-js" nil t)
-(autoload 'slime-js-jack-in-node "setup-slime-js" nil t)
+;; Load skewer when asked for
+(autoload 'skewer-start "setup-skewer" nil t)
+(autoload 'skewer-demo "setup-skewer" nil t)
+
+;; Load autocomplete on demand
+(autoload 'auto-complete-mode "auto-complete" nil t)
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -116,12 +121,6 @@
 (require 'visual-regexp)
 (define-key global-map (kbd "M-&") 'vr/query-replace)
 (define-key global-map (kbd "M-/") 'vr/replace)
-
-;; Tern.js
-
-(add-to-list 'load-path (expand-file-name "tern/emacs" site-lisp-dir))
-(autoload 'tern-mode "tern.el" nil t)
-(add-hook 'js2-mode-hook (lambda () (tern-mode t)))
 
 ;; Functions (load all files in defuns-dir)
 (setq defuns-dir (expand-file-name "defuns" user-emacs-directory))
@@ -158,20 +157,12 @@
 
 ;; Misc
 (require 'project-archetypes)
-(require 'appearance)
 (require 'my-misc)
 (when is-mac (require 'mac))
-
-;; Diminish modeline clutter
-(require 'diminish)
-(diminish 'yas/minor-mode)
-(diminish 'eldoc-mode)
-(diminish 'paredit-mode)
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
 (add-hook 'emacs-lisp-mode-hook (lambda () (elisp-slime-nav-mode t) (eldoc-mode 1)))
-(eval-after-load 'elisp-slime-nav '(diminish 'elisp-slime-nav-mode))
 
 ;; Email, baby
 (require 'setup-mu4e)
@@ -183,6 +174,7 @@
 
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
 ;; Conclude init by setting up specifics for the current user

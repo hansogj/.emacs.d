@@ -81,6 +81,9 @@
 (global-set-key (kbd "M-t s") 'transpose-sexps)
 (global-set-key (kbd "M-t p") 'transpose-params)
 
+;; Interactive selective display
+(global-set-key (kbd "C-x $") 'inc-selective-display)
+
 ;; Change next underscore with a camel case
 (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
 (global-set-key (kbd "M-s M--") 'snakeify-current-word)
@@ -135,7 +138,7 @@
 
 ;; toggle two most recent buffers
 (fset 'quick-switch-buffer [?\C-x ?b return])
-(global-set-key (kbd "s-j") 'quick-switch-buffer)
+(global-set-key (kbd "s-b") 'quick-switch-buffer)
 
 ;; Revert without any fuss
 (global-set-key (kbd "M-<escape>")
@@ -269,6 +272,8 @@
 
 ;; Increase number at point (or other change based on prefix arg)
 (global-set-key (kbd "C-+") 'change-number-at-point)
+(global-set-key (kbd "C-?") 'subtract-number-at-point)
+(eval-after-load 'undo-tree '(define-key undo-tree-map (kbd "C-?") nil))
 
 ;; Browse the kill ring
 (global-set-key (kbd "C-x C-y") 'browse-kill-ring)
@@ -303,6 +308,7 @@
 (global-unset-key (kbd "C-x C-o")) ;; which used to be delete-blank-lines (also bound to C-c C-<return>)
 (global-set-key (kbd "C-x C-o ja") (ffip-create-pattern-file-finder "*.java"))
 (global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js"))
+(global-set-key (kbd "C-x C-o ht") (ffip-create-pattern-file-finder "*.html"))
 (global-set-key (kbd "C-x C-o jp") (ffip-create-pattern-file-finder "*.jsp"))
 (global-set-key (kbd "C-x C-o cs") (ffip-create-pattern-file-finder "*.css"))
 (global-set-key (kbd "C-x C-o cl") (ffip-create-pattern-file-finder "*.clj"))
@@ -316,6 +322,7 @@
 (global-set-key (kbd "C-x C-o xm") (ffip-create-pattern-file-finder "*.xml"))
 (global-set-key (kbd "C-x C-o pr") (ffip-create-pattern-file-finder "*.properties"))
 (global-set-key (kbd "C-x C-o in") (ffip-create-pattern-file-finder "*.ini"))
+(global-set-key (kbd "C-x C-o gr") (ffip-create-pattern-file-finder "*.groovy"))
 
 ;; View occurrence in occur mode
 (define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)

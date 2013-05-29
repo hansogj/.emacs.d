@@ -3,11 +3,19 @@
 (setq js-indent-level 2)
 
 ;; Disallow scrolling with mouse wheel
-(mouse-wheel-mode -1)
+(when window-system
+  (mouse-wheel-mode -1))
 
 ;; Font size
 (define-key global-map (kbd "M-s +") 'zoom-in)
 (define-key global-map (kbd "M-s -") 'zoom-out)
+
+;; No more scrolling surprises
+(global-unset-key (kbd "C-v"))
+(global-unset-key (kbd "M-v"))
+
+;; No graphics please o.O
+(setq speedbar-use-images nil)
 
 ;; PHP
 (autoload 'php-mode "php-mode")
