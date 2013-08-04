@@ -3,12 +3,9 @@
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
-<<<<<<< HEAD
 (set-face-background 'region "#464740")
 (set-face-foreground 'font-lock-comment-face "#999999")
 
-=======
->>>>>>> upstream/master
 ;; Highlight current line
 (global-hl-line-mode 1)
 
