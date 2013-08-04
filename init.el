@@ -53,17 +53,22 @@
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
-   '(exec-path-from-shell
-     magit
+   '(magit
      paredit
      move-text
      gist
      htmlize
      visual-regexp
+     flycheck
+     flx
+     flx-ido
      smartparens
      ido-vertical-mode
      simple-httpd
+     guide-key
+     nodejs-repl
      restclient
+     highlight-escape-sequences
      elisp-slime-nav
      git-commit-mode
      gitconfig-mode
@@ -81,7 +86,17 @@
 (require 'sane-defaults)
 
 ;; Setup environment variables from the user's shell.
-(when is-mac (exec-path-from-shell-initialize))
+(when is-mac
+  (require-package 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
+;; guide-key
+(require 'guide-key)
+(setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-x v" "C-x 8"))
+(guide-key-mode 1)
+(setq guide-key/highlight-command-regexp "bookmark")
+(setq guide-key/recursive-key-sequence-flag t)
+(setq guide-key/popup-window-position 'bottom)
 
 ;; Setup extensions
 (eval-after-load 'ido '(require 'setup-ido))
@@ -100,6 +115,11 @@
 ;; Default setup of smartparens
 (require 'smartparens-config)
 (setq sp-autoescape-string-quote nil)
+(--each '(css-mode-hook
+          restclient-mode-hook
+          js-mode-hook
+          markdown-mode)
+  (add-hook it 'turn-on-smartparens-mode))
 
 ;; Language specific setup files
 (eval-after-load 'js2-mode '(require 'setup-js2-mode))
@@ -107,15 +127,19 @@
 (eval-after-load 'clojure-mode '(require 'setup-clojure-mode))
 (eval-after-load 'markdown-mode '(require 'setup-markdown-mode))
 
-;; Load skewer when asked for
+;; Load stuff on demand
 (autoload 'skewer-start "setup-skewer" nil t)
 (autoload 'skewer-demo "setup-skewer" nil t)
-
-;; Load autocomplete on demand
+(autoload 'flycheck-mode "setup-flycheck" nil t)
 (autoload 'auto-complete-mode "auto-complete" nil t)
 
 ;; Map files to modes
 (require 'mode-mappings)
+
+;; Highlight escape sequences
+(require 'highlight-escape-sequences)
+(hes-mode)
+(put 'font-lock-regexp-grouping-backslash 'face-alias 'font-lock-builtin-face)
 
 ;; Visual regexp
 (require 'visual-regexp)
@@ -129,8 +153,6 @@
     (load file)))
 
 (require 'expand-region)
-(require 'mark-more-like-this)
-(require 'inline-string-rectangle)
 (require 'multiple-cursors)
 (require 'delsel)
 (require 'jump-char)

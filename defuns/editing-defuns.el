@@ -1,4 +1,4 @@
-;; Basic text editing defuns
+;;; editing-defuns.el --- Basic text editing defuns -*- lexical-binding: t; -*-
 
 (defun open-line-below ()
   (interactive)
@@ -21,35 +21,65 @@
     (indent-for-tab-command))
   (indent-for-tab-command))
 
+(defun new-line-dwim ()
+  (interactive)
+  (let ((break-open-pair (or (and (looking-back "{") (looking-at "}"))
+                             (and (looking-back ">") (looking-at "<"))
+                             (and (looking-back "\\[") (looking-at "\\]")))))
+    (newline)
+    (when break-open-pair
+      (save-excursion
+        (newline)
+        (indent-for-tab-command)))
+    (indent-for-tab-command)))
+
 (defun duplicate-current-line-or-region (arg)
   "Duplicates the current line or region ARG times.
 If there's no region, the current line will be duplicated."
   (interactive "p")
-  (save-excursion
-    (if (region-active-p)
-        (duplicate-region arg)
-      (duplicate-current-line arg))))
+  (if (region-active-p)
+      (let ((beg (region-beginning))
+            (end (region-end)))
+        (duplicate-region arg beg end)
+        (one-shot-keybinding "d" (λ (duplicate-region 1 beg end))))
+    (duplicate-current-line arg)
+    (one-shot-keybinding "d" 'duplicate-current-line)))
 
-(defun duplicate-region (num &optional start end)
+(defun one-shot-keybinding (key command)
+  (set-temporary-overlay-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map (kbd key) command)
+     map) t))
+
+(defun replace-region-by (fn)
+  (let* ((beg (region-beginning))
+         (end (region-end))
+         (contents (buffer-substring beg end)))
+    (delete-region beg end)
+    (insert (funcall fn contents))))
+
+(defun duplicate-region (&optional num start end)
   "Duplicates the region bounded by START and END NUM times.
 If no START and END is provided, the current region-beginning and
 region-end is used."
   (interactive "p")
-  (let* ((start (or start (region-beginning)))
-         (end (or end (region-end)))
-         (region (buffer-substring start end)))
-    (goto-char start)
-    (dotimes (i num)
-      (insert region))))
+  (save-excursion
+   (let* ((start (or start (region-beginning)))
+          (end (or end (region-end)))
+          (region (buffer-substring start end)))
+     (goto-char end)
+     (dotimes (i num)
+       (insert region)))))
 
-(defun duplicate-current-line (num)
+(defun duplicate-current-line (&optional num)
   "Duplicate the current line NUM times."
   (interactive "p")
-  (when (eq (point-at-eol) (point-max))
-    (goto-char (point-max))
-    (newline)
-    (forward-char -1))
-  (duplicate-region num (point-at-bol) (1+ (point-at-eol))))
+  (save-excursion
+   (when (eq (point-at-eol) (point-max))
+     (goto-char (point-max))
+     (newline)
+     (forward-char -1))
+   (duplicate-region num (point-at-bol) (1+ (point-at-eol)))))
 
 ;; automatically indenting yanked text if in programming-modes
 
@@ -203,10 +233,10 @@ region-end is used."
               (looking-back "[0-9]"))
     (error "No number to change at point"))
   (save-excursion
-   (while (looking-back "[0-9]")
-     (forward-char -1))
-   (re-search-forward "[0-9]+" nil)
-   (replace-match (incs (match-string 0) arg) nil nil)))
+    (while (looking-back "[0-9]")
+      (forward-char -1))
+    (re-search-forward "[0-9]+" nil)
+    (replace-match (incs (match-string 0) arg) nil nil)))
 
 (defun subtract-number-at-point (arg)
   (interactive "p")
