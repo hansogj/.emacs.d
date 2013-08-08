@@ -46,6 +46,7 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
+(setq is-linux (equal system-type 'gnu/linux))
 
 ;; Setup packages
 (require 'setup-package)
@@ -181,6 +182,7 @@
 (require 'project-archetypes)
 (require 'my-misc)
 (when is-mac (require 'mac))
+(when is-linux (require 'linux))
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
