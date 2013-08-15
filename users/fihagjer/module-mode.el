@@ -29,12 +29,12 @@ in an exploded war, re-deploy the file."
   (interactive)
   (let* ((source (buffer-file-name))
          (target (s-with source
-                   (s-replace "/finn/git/commons-web/src/main/webapp" module-target-dir)
                    (s-replace "/finn/git/analytics-js/src/main/webapp" module-target-dir)
                    (s-replace "/finn/git/core-js/src/main/webapp" module-target-dir)
-                   (s-replace "/finn/git/user-js/src/main/webapp" module-target-dir)
-                   (s-replace "/finn/git/strapon-java-web/src/main/webapp" module-target-dir)
-                   (s-replace "/finn/git/mupf-js/src/main/webapp" module-target-dir))))
+                   (s-replace "/finn/git/mupf-js/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-core-web/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-core-js/src/main/webapp" module-target-dir)
+                   (s-replace "/finn/git/strapon-java-web/src/main/webapp" module-target-dir))))
     (if (and (file-writable-p target)
              (not (string= source target)))
         (progn

@@ -79,7 +79,9 @@
 (def-finn-project-with-branch "n" "mfinn")
 (def-finn-project-with-branch "c" "core-js")
 (def-finn-project-with-branch "a" "analytics-js")
-(def-finn-project-with-branch "w" "strapon-java-web")
+(def-finn-project-with-branch "s j" "strapon-java-web")
+(def-finn-project-with-branch "s c" "strapon-core-js")
+(def-finn-project-with-branch "s w" "strapon-core-web")
 
 (define-key persp-mode-map (kbd "C-x p e") 'custom-persp/emacs)
-(define-key persp-mode-map (kbd "C-x p s") 'custom-persp/stories-framework)
+(define-key persp-mode-map (kbd "C-x p s f") 'custom-persp/stories-framework)

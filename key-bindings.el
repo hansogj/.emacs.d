@@ -190,6 +190,7 @@
 (global-set-key (kbd "C-x M-g") 'browse-url-at-point)
 
 ;; Completion at point
+
 (global-set-key (kbd "C-<tab>") 'completion-at-point)
 
 ;; Like isearch, but adds region (if any) to history and deactivates mark
@@ -332,10 +333,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;fihagjer bindings
+(global-set-key [end] 'end-of-line)
 (global-set-key (kbd "C-c l") 'lookup-file)
 (global-set-key (kbd "C-c C-l") 'load-init-file)
 (global-set-key (kbd "M-∕") 'comment-current-line)
-(global-set-key (kbd "∕") 'insert-asterix)
+;;(global-set-key [/] 'insert-asterix)
 (global-set-key (quote [f6]) 'copy-whole-buffer)
 (global-set-key (kbd "C-x v e") 'vc-ediff)
 (global-set-key (kbd "C-+") 'enlarge-font)
