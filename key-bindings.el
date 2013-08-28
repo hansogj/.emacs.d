@@ -336,7 +336,7 @@
 (global-set-key [end] 'end-of-line)
 (global-set-key (kbd "C-c l") 'lookup-file)
 (global-set-key (kbd "C-c C-l") 'load-init-file)
-(global-set-key (kbd "M-∕") 'comment-current-line)
+(global-set-key (kbd "M-⋅") 'comment-current-line)
 ;;(global-set-key [/] 'insert-asterix)
 (global-set-key (quote [f6]) 'copy-whole-buffer)
 (global-set-key (kbd "C-x v e") 'vc-ediff)

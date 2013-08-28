@@ -3,13 +3,13 @@
 (defmacro project-specifics (name &rest body)
   `(progn
      (add-hook 'find-file-hook
-               (lambda ()
-                 (when (string-match-p ,name (buffer-file-name))
-                   ,@body)))
+	       (lambda ()
+		 (when (string-match-p ,name (buffer-file-name))
+		   ,@body)))
      (add-hook 'dired-after-readin-hook
-               (lambda ()
-                 (when (string-match-p ,name (dired-current-directory))
-                   ,@body)))))
+	       (lambda ()
+		 (when (string-match-p ,name (dired-current-directory))
+		   ,@body)))))
 
 (defun setup-find-file-in-project ()
   (ffip-local-excludes "target" "overlays")
@@ -19,8 +19,8 @@
 (defun custom-persp/emacs ()
   (interactive)
   (custom-persp "emacs"
-                (set-background-color "black")
-                (find-file "~/.emacs.d/init.el")))
+		(set-background-color "black")
+		(find-file "~/.emacs.d/init.el")))
 
 (project-specifics ".emacs.d"
   (ffip-local-excludes "swank")
@@ -30,13 +30,23 @@
 (defun custom-persp/stories-framework ()
   (interactive)
   (custom-persp "stories-framework"
-                (set-background-color "black")
-                (find-file "/finn/git/stories-framework/")))
+		(set-background-color "black")
+		(find-file "/finn/git/stories-framework/")))
 
 (project-specifics "/finn/git/stories-framework/"
   (setup-find-file-in-project))
 
-;; FINN
+;; self-service
+(defun custom-persp/self-service ()
+  (interactive)
+  (custom-persp "self-service"
+		(set-background-color "black")
+		(find-file "/finn/git/self-service/")))
+
+(project-specifics "/finn/git/self-service/"
+  (setup-find-file-in-project))
+
+;; Finn
 
 (defmacro def-finn-project-with-branch (shortcut name)
   `(progn
@@ -44,25 +54,27 @@
      (defun ,(intern (concat "custom-persp/" name)) ()
        (interactive)
        (custom-persp ,name
-                     (set-background-color "black")
-                     (find-file ,(concat "/finn/git/" name "/"))))
+		     (set-background-color "black")
+		     (find-file ,(concat "/finn/git/" name "/"))))
 
      (defun ,(intern (concat "custom-persp/" name "-branched")) ()
        (interactive)
        (message (string= "iad" ,name))
        (custom-persp ,name
-                     (set-background-color "RosyBrown4")
-                     (find-file ,(concat "/finn/git/" name "/"))))
+		     (set-background-color "RosyBrown4")
+		     (find-file ,(concat "/finn/git/" name "/"))))
 
      (project-specifics ,(concat "/finn/git/" name "/")
 
        (cond
-        ((string= ,name "iad")
-         (iad-mode 1))
-        ((string= ,name "mfinn")
-         (mfinn-mode 1))
-        (t
-         (module-mode 1)))
+	((string= ,name "iad")
+	 (iad-mode 1))
+	((string= ,name "mfinn")
+	 (mfinn-mode 1))
+	((string= ,name "self-service")
+	 (self-service-mode 1))
+	(t
+	 (module-mode 1)))
 
        ;; (case ,name
        ;;   ("iad"  (iad-mode 1))
@@ -82,6 +94,8 @@
 (def-finn-project-with-branch "s j" "strapon-java-web")
 (def-finn-project-with-branch "s c" "strapon-core-js")
 (def-finn-project-with-branch "s w" "strapon-core-web")
+(def-finn-project-with-branch "s s" "self-service")
+
 
 (define-key persp-mode-map (kbd "C-x p e") 'custom-persp/emacs)
 (define-key persp-mode-map (kbd "C-x p s f") 'custom-persp/stories-framework)

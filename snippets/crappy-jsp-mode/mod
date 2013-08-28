@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: mod
+# key: mod
+# --
+<div class="mod">
+    <div class="inner">
+        <div class="hd">
+            <h3>mod</h3>
+        </div>
+        <div class="bd">
+
+        </div>
+    </div>
+</div>
