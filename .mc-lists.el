@@ -150,9 +150,11 @@
         multiple-cursors-mode
         overwrite-mode
         persp-switch
+        sgml-close-tag
         shell
         smex
         wgrep-change-to-wgrep-mode
         wgrep-finish-edit
         wgrep-save-all-buffers
+        yas-expand
         ))
