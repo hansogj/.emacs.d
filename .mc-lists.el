@@ -33,6 +33,7 @@
         forward-paragraph
         forward-sentence
         forward-sexp
+        god-mode-repeat
         hippie-expand-no-case-fold
         html-wrap-in-tag
         js2-beginning-of-line
@@ -90,6 +91,7 @@
         paredit-reindent-defun
         paredit-semicolon
         paredit-splice-sexp
+        paredit-splice-sexp-killing-backward
         paredit-split-sexp
         paredit-wrap-round
         paredit-wrap-round-from-behind
@@ -149,6 +151,7 @@
         mc/add-cursors-to-all-matches
         multiple-cursors-mode
         overwrite-mode
+        god-local-mode
         persp-switch
         sgml-close-tag
         shell

@@ -57,6 +57,7 @@
    '(magit
      paredit
      move-text
+     god-mode
      gist
      htmlize
      visual-regexp
@@ -65,6 +66,7 @@
      flx-ido
      smartparens
      ido-vertical-mode
+     ido-at-point
      simple-httpd
      guide-key
      nodejs-repl
@@ -98,6 +100,10 @@
 (setq guide-key/highlight-command-regexp "bookmark")
 (setq guide-key/recursive-key-sequence-flag t)
 (setq guide-key/popup-window-position 'bottom)
+
+;; god-mode
+(require 'god-mode)
+(global-set-key (kbd "<escape>") 'god-local-mode)
 
 ;; Setup extensions
 (eval-after-load 'ido '(require 'setup-ido))
