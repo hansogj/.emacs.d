@@ -1,3 +1,9 @@
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -26,7 +32,10 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (concat user-emacs-directory "users/" user-login-name))
+      (if (or (equal user-login-name  "hansogj") 
+              (equal user-login-name "ekst_hogj"))
+          (concat user-emacs-directory "users/" "fihagjer")
+        (concat user-emacs-directory "users/" user-login-name)))
 (add-to-list 'load-path user-settings-dir)
 
 ;; Add external projects to load path
@@ -49,6 +58,7 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
+(setq is-linux (equal system-type 'gnu/linux))
 
 ;; Setup packages
 (require 'setup-package)
@@ -202,7 +212,7 @@
 
 ;; Smart M-x is smart
 (require 'smex)
-(smex-initialize)
+;;(smex-initialize)
 
 ;; Setup key bindings
 (require 'key-bindings)
@@ -211,6 +221,7 @@
 (require 'project-archetypes)
 (require 'my-misc)
 (when is-mac (require 'mac))
+(when is-linux (require 'linux))
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
@@ -229,3 +240,7 @@
 ;; Conclude init by setting up specifics for the current user
 (when (file-exists-p user-settings-dir)
   (mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))
+
+
+;; fihagjers quicklist
+(require 'quick-list)

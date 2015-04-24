@@ -12,9 +12,9 @@
 (global-set-key (kbd "s-.") 'copy-from-above-command)
 
 ;; Smart M-x
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+;;(global-set-key (kbd "M-x") 'smex)
+;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Use C-x C-m to do M-x per Steve Yegge's advice
 (global-set-key (kbd "C-x C-m") 'smex)
@@ -184,11 +184,12 @@
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
 (global-set-key (kbd "<prior>") 'beginning-of-buffer)
-(global-set-key (kbd "<home>") 'beginning-of-buffer)
+(global-set-key (kbd "M-<home>") 'beginning-of-buffer)
 (global-set-key (kbd "<next>") 'end-of-buffer)
-(global-set-key (kbd "<end>") 'end-of-buffer)
+(global-set-key (kbd "M-<end>") 'end-of-buffer)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "C-z") 'undo)
 
 (global-set-key (kbd "M-<up>") 'smart-up)
 (global-set-key (kbd "M-<down>") 'smart-down)
@@ -200,6 +201,7 @@
 (global-set-key (kbd "C-x M-g") 'browse-url-at-point)
 
 ;; Completion at point
+
 (global-set-key (kbd "C-<tab>") 'completion-at-point)
 
 ;; Like isearch, but adds region (if any) to history and deactivates mark
@@ -249,6 +251,7 @@
 ;; Magit
 (global-set-key (kbd "C-x m") 'magit-status)
 (autoload 'magit-status "magit")
+
 
 ;; Clever newlines
 (global-set-key (kbd "C-o") 'open-line-and-indent)
@@ -315,7 +318,9 @@
 (global-unset-key (kbd "C-x C-o")) ;; which used to be delete-blank-lines (also bound to C-c C-<return>)
 (global-set-key (kbd "C-x C-o ja") (ffip-create-pattern-file-finder "*.java"))
 (global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js"))
+(global-set-key (kbd "C-x C-o jx") (ffip-create-pattern-file-finder "*.jsx"))
 (global-set-key (kbd "C-x C-o ht") (ffip-create-pattern-file-finder "*.html"))
+(global-set-key (kbd "C-x C-o mu") (ffip-create-pattern-file-finder "*.mustache"))
 (global-set-key (kbd "C-x C-o jp") (ffip-create-pattern-file-finder "*.jsp"))
 (global-set-key (kbd "C-x C-o cs") (ffip-create-pattern-file-finder "*.css"))
 (global-set-key (kbd "C-x C-o ft") (ffip-create-pattern-file-finder "*.feature"))
@@ -342,5 +347,26 @@
 (define-key occur-mode-map (kbd "v") 'occur-mode-display-occurrence)
 (define-key occur-mode-map (kbd "n") 'next-line)
 (define-key occur-mode-map (kbd "p") 'previous-line)
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;fihagjer bindings
+(global-set-key [end] 'end-of-line)
+(global-set-key (kbd "C-c l") 'lookup-file)
+(global-set-key (kbd "C-c C-l") 'load-init-file)
+(global-set-key (kbd "M-⋅") 'comment-current-line)
+;;(global-set-key [/] 'insert-asterix)
+(global-set-key (quote [f6]) 'copy-whole-buffer)
+(global-set-key (kbd "C-x v e") 'vc-ediff)
+(global-set-key (kbd "C-+") 'enlarge-font)
+(global-set-key (kbd "C-M-+") 'text-scale-decrease)
+(global-set-key (kbd "C-x C-.") 'kill-whitespace)
+(global-set-key (kbd "C-x C-:") 'one-liner)
+(global-set-key (kbd "C-c C") 'comment-box)
+(global-set-key (kbd "C-x r a") 'align-regexp)
+(require 'iso-transl)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (provide 'key-bindings)

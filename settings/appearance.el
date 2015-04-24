@@ -3,6 +3,9 @@
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
+(set-face-background 'region "#464740")
+(set-face-foreground 'font-lock-comment-face "#999999")
+
 ;; Highlight current line
 (global-hl-line-mode 1)
 
@@ -60,7 +63,10 @@
 
 ;; Unclutter the modeline
 (require 'diminish)
-(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(if (or (equal (getenv "USER")  "smiley") 
+        (equal (getenv "USER") "fihagjer"))
+    (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+  (eval-after-load "yasnippet" '(diminish 'yas-minor-mode)))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "paredit" '(diminish 'paredit-mode))
 (eval-after-load "tagedit" '(diminish 'tagedit-mode))
