@@ -158,6 +158,7 @@
         touch-buffer-file
         transpose-params
         transpose-sexps
+        undo-tree-visualize
         wdired-next-line
         wdired-previous-line
         wrap-region-trigger
@@ -182,6 +183,7 @@
         god-local-mode
         goto-line-with-feedback
         handle-switch-frame
+        ido-find-file
         ido-switch-buffer
         js2r-extract-var
         js2r-rename-var
@@ -194,6 +196,10 @@
         multiple-cursors-mode
         ns-prev-frame
         persp-switch
+        previous-buffer
+        sgml-close-tag
+        sgml-maybe-name-self
+        eika/antihvitvask project
         shell
         skewer-load-buffer
         smex

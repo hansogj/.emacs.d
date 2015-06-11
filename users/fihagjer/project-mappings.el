@@ -44,6 +44,13 @@
 (project-specifics "~/Dropbox")
 
 
+(defun custom-persp/eika-ahv ()
+  (interactive)
+  (custom-persp "eika-ahv"
+                (set-alternative-background)
+                (find-file "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")))
+(project-specifics "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")
+
 ;; cucumber
 (defun custom-persp/stories-framework ()
   (interactive)
@@ -117,7 +124,8 @@
 (def-finn-project-with-branch "n" "mfinn")
 ;;(def-finn-project-with-branch "c" "core-js")
 (def-finn-project-with-branch "c s" "common-validator-js")
-(def-finn-project-with-branch "a" "analytics-js")
+(def-finn-project-with-branch "a n" "analytics-js")
+
 (def-finn-project-with-branch "o m" "organisation-management-web")
 (def-finn-project-with-branch "r u" "realestate-upsale")
 (def-finn-project-with-branch "s j" "strapon-java-web")
@@ -126,7 +134,8 @@
 (def-finn-project-with-branch "s s" "self-service")
 (def-finn-project-with-branch "s p" "spid-js")
 
-(define-key persp-mode-map (kbd "C-x p e") 'custom-persp/emacs)
+(define-key persp-mode-map (kbd "C-x p e m") 'custom-persp/emacs)
+(define-key persp-mode-map (kbd "C-x p e a") 'custom-persp/eika-ahv)
 (define-key persp-mode-map (kbd "C-x p b i") 'custom-persp/bin)
 (define-key persp-mode-map (kbd "C-x p d") 'custom-persp/dropbox)
 (define-key persp-mode-map (kbd "C-x p s f") 'custom-persp/stories-framework)
