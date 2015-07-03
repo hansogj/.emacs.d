@@ -1,4 +1,4 @@
-(message "hello void from quicklist")
+(message " hello from init")
 ;;fihagjer changes
 (add-to-list 'load-path "./site-lisp/emacs-nav/")
 (require 'nav)
@@ -106,5 +106,18 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
+;; Default js indentation levels
+(setq-default js2-basic-offset 2)
+(setq js-indent-level 2)
 
-(provide 'quick-list)
+;; Disallow scrolling with mouse wheel
+(when window-system
+  (mouse-wheel-mode -1))
+
+;; Font size
+(define-key global-map (kbd "M-s +") 'zoom-in)
+(define-key global-map (kbd "M-s -") 'zoom-ou)
+
+
+;;(provide 'quick-list)
+

@@ -178,6 +178,7 @@
         describe-key
         dired-toggle-read-only
         edebug-next-mode
+        eika/antihvitvask
         eval-expression
         find-tag
         god-local-mode
@@ -185,6 +186,7 @@
         handle-switch-frame
         ido-find-file
         ido-switch-buffer
+        js2-mode-show-node
         js2r-extract-var
         js2r-rename-var
         jump-between-source-and-test-files
@@ -197,9 +199,9 @@
         ns-prev-frame
         persp-switch
         previous-buffer
+        project
         sgml-close-tag
         sgml-maybe-name-self
-        eika/antihvitvask project
         shell
         skewer-load-buffer
         smex
