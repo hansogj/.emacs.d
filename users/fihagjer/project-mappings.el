@@ -51,6 +51,21 @@
                 (find-file "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")))
 (project-specifics "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")
 
+(defun custom-persp/eika-raadgiverportal_boostrap-lib ()
+  (interactive)
+  (custom-persp "eika-raadgiverportal_boostrap-lib"
+                (find-file "/git/eika/raadgiverportal_boostrap-lib/")))
+(project-specifics "/git/eika/raadgiverportal_boostrap-lib/")
+
+
+(defun custom-persp/eika-erklaring ()
+  (interactive)
+  (custom-persp "eika-eika-erklaring"
+                (set-alternative-background)
+                (find-file "/git/eika/antihvitvask-erklaering-angularjs-lib/")))
+(project-specifics "/git/eika/antihvitvask-erklaering-angularjs-lib/")
+
+
 ;; cucumber
 (defun custom-persp/stories-framework ()
   (interactive)
@@ -135,7 +150,9 @@
 (def-finn-project-with-branch "s p" "spid-js")
 
 (define-key persp-mode-map (kbd "C-x p e m") 'custom-persp/emacs)
+(define-key persp-mode-map (kbd "C-x p e e") 'custom-persp/eika-erklaring)
 (define-key persp-mode-map (kbd "C-x p e a") 'custom-persp/eika-ahv)
+(define-key persp-mode-map (kbd "C-x p e r") 'custom-persp/eika-raadgiverportal_boostrap-lib)
 (define-key persp-mode-map (kbd "C-x p b i") 'custom-persp/bin)
 (define-key persp-mode-map (kbd "C-x p d") 'custom-persp/dropbox)
 (define-key persp-mode-map (kbd "C-x p s f") 'custom-persp/stories-framework)

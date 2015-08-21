@@ -93,6 +93,7 @@
         org-shiftright
         org-yank
         orgtbl-self-insert-command
+        overwrite-mode
         paredit-backslash
         paredit-backward
         paredit-backward-barf-sexp
