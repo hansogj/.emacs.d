@@ -62,7 +62,10 @@
   (interactive)
   (custom-persp "eika-eika-erklaring"
                 (set-alternative-background)
-                (find-file "/git/eika/antihvitvask-erklaering-angularjs-lib/")))
+                (find-file "/git/eika/antihvitvask-erklaering-angularjs-lib/")
+                (set-background-color  "gray20")
+                ))
+
 (project-specifics "/git/eika/antihvitvask-erklaering-angularjs-lib/")
 
 
