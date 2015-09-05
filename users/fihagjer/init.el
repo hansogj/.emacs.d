@@ -25,6 +25,13 @@
   (let ((ffip-project-root path))
     (call-interactively 'find-file-in-project)))
 
+(defun undebug ()
+  (interactive)
+  (beginning-of-buffer)
+  (replace-string "debugger;" "")
+  (replace-string "debugger;\n" ""))
+
+
 (defun xit ()
   (interactive)
   (beginning-of-buffer)
