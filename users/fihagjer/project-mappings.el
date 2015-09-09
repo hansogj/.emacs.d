@@ -58,6 +58,15 @@
 (project-specifics "/git/eika/raadgiverportal_boostrap-lib/")
 
 
+(defun custom-persp/bli_kunde ()
+  (interactive)
+  (custom-persp "eika-bli-kunde"
+                (set-alternative-background)
+                (find-file "/git/eika/bli_kunde/")
+                (set-background-color  "DarkSlateGray")))
+(project-specifics "/git/eika/bli_kunde/")
+
+
 (defun custom-persp/eika-erklaring ()
   (interactive)
   (custom-persp "eika-eika-erklaring"
@@ -152,6 +161,7 @@
 
 (define-key persp-mode-map (kbd "C-x p e m") 'custom-persp/emacs)
 (define-key persp-mode-map (kbd "C-x p e e") 'custom-persp/eika-erklaring)
+(define-key persp-mode-map (kbd "C-x p b k") 'custom-persp/bli_kunde)
 (define-key persp-mode-map (kbd "C-x p e a") 'custom-persp/eika-ahv)
 (define-key persp-mode-map (kbd "C-x p e r") 'custom-persp/eika-raadgiverportal_boostrap-lib)
 (define-key persp-mode-map (kbd "C-x p b i") 'custom-persp/bin)
