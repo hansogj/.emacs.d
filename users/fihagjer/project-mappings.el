@@ -62,9 +62,9 @@
   (interactive)
   (custom-persp "eika-bli-kunde"
                 (set-alternative-background)
-                (find-file "/git/eika/bli_kunde/")
+                (find-file "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
                 (set-background-color  "DarkSlateGray")))
-(project-specifics "/git/eika/bli_kunde/")
+(project-specifics "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
 
 
 (defun custom-persp/eika-erklaring ()
