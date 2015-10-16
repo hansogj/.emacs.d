@@ -87,6 +87,15 @@
   (end-of-line)
   (kill-whitespace))
 
+(defun split-four ()
+  "split window into four balanced verticals"
+  (interactive "*")
+  (split-window-right-and-move-there-dammit)
+  (split-window-right-and-move-there-dammit)
+  (split-window-right-and-move-there-dammit)
+  (balance-windows)
+)
+
 (defun open-home-folder ()
   "goto home folder"
   (dired "~/"))
