@@ -167,6 +167,7 @@
 (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
 
 (global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
+(global-set-key (kbd "C-x 4") 'split-four)
 
 ;; Add region to *multifile*
 (global-set-key (kbd "C-!") 'mf/mirror-region-in-multifile)
