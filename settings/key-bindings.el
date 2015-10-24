@@ -351,25 +351,4 @@
 (define-key occur-mode-map (kbd "n") 'next-line)
 (define-key occur-mode-map (kbd "p") 'previous-line)
 
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;fihagjer bindings
-(global-set-key [end] 'end-of-line)
-(global-set-key (kbd "C-c l") 'lookup-file)
-(global-set-key (kbd "C-c C-l") 'load-init-file)
-(global-set-key (kbd "M-⋅") 'comment-current-line)
-;;(global-set-key [/] 'insert-asterix)
-(global-set-key (quote [f6]) 'copy-whole-buffer)
-(global-set-key (kbd "C-x v e") 'vc-ediff)
-(global-set-key (kbd "C-+") 'enlarge-font)
-(global-set-key (kbd "C-M-+") 'text-scale-decrease)
-(global-set-key (kbd "C-x C-.") 'kill-whitespace)
-(global-set-key (kbd "C-x C-:") 'one-liner)
-(global-set-key (kbd "C-c C") 'comment-box)
-(global-set-key (kbd "C-x r a") 'align-regexp)
-(require 'iso-transl)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (provide 'key-bindings)
