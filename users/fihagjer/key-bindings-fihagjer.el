@@ -17,4 +17,4 @@
 (global-set-key (kbd "C-x r a") 'align-regexp)
 (global-set-key (kbd "M-s M-d") 'sgml-delete-tag)
 
-(provide key-bindings-fihagjer)
+(provide 'key-bindings-fihagjer)
