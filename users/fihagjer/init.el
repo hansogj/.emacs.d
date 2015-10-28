@@ -74,10 +74,21 @@
           (re-search-forward "[ \t\r\n]+" nil t)
           (replace-match "" nil nil))))))
 
-(defun set-alternative-background ()
+(defun set-background-custom (color)
   "Setting alternative background color"
-  (interactive "*")
-  (set-background-color "#2d3743"))
+  (interactive
+   (list
+    (completing-read "choose color:" '("gray20" "darkslategray" "black" "kindOfBlue" "dreadfullRed" ))))
+
+  (if (equal color "kindOfBlue")
+      (setq color "#2d3743")
+    nil)
+  (if (equal color "dreadfullRed")
+      (setq color "#3D0707")
+    nil)
+  (message "change background-color: " color)
+  (set-background-color color))
+;;  (set-background-color "#2d3743")
 
 (defun one-liner ()
   "kill whitespace befor and after a line"

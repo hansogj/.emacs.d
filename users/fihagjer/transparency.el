@@ -10,7 +10,7 @@
        100)
       (set-frame-parameter nil 'alpha '(100 100))
     (set-frame-parameter nil 'alpha '(85 50))))
-(global-set-key (kbd "C-c t") 'toggle-transparency)
+
 
 ;; Set transparency of emacs
 (defun transparency (value)

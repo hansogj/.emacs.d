@@ -16,5 +16,7 @@
 (global-set-key (kbd "C-c C") 'comment-box)
 (global-set-key (kbd "C-x r a") 'align-regexp)
 (global-set-key (kbd "M-s M-d") 'sgml-delete-tag)
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+(global-set-key (kbd "C-c C-b") 'set-background-custom)
 
 (provide 'key-bindings-fihagjer)
