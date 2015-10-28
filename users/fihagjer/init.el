@@ -78,13 +78,15 @@
   "Setting alternative background color"
   (interactive
    (list
-    (completing-read "choose color:" '("gray20" "darkslategray" "black" "kindOfBlue" "dreadfullRed" ))))
-
+    (completing-read "choose color:" '("gray20" "darkslategray" "black" "kindOfBlue" "dreadfullRed" "poisonGreen"))))
   (if (equal color "kindOfBlue")
       (setq color "#2d3743")
     nil)
+  (if (equal color "poisonGreen")
+      (setq color "#082500")
+    nil)
   (if (equal color "dreadfullRed")
-      (setq color "#3D0707")
+      (setq color "#391111")
     nil)
   (message "change background-color: " color)
   (set-background-color color))
