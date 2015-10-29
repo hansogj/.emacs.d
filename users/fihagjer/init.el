@@ -103,11 +103,10 @@
 (defun split-four ()
   "split window into four balanced verticals"
   (interactive "*")
-  (split-window-right-and-move-there-dammit)
-  (split-window-right-and-move-there-dammit)
-  (split-window-right-and-move-there-dammit)
-  (balance-windows)
-)
+  (split-window-right)
+  (split-window-right)
+  (split-window-right)
+  (balance-windows))
 
 (defun open-home-folder ()
   "goto home folder"
