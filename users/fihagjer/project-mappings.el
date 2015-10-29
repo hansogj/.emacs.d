@@ -3,13 +3,13 @@
 (defmacro project-specifics (name &rest body)
   `(progn
      (add-hook 'find-file-hook
-           (lambda ()
-         (when (string-match-p ,name (buffer-file-name))
-           ,@body)))
+               (lambda ()
+                 (when (string-match-p ,name (buffer-file-name))
+                   ,@body)))
      (add-hook 'dired-after-readin-hook
-           (lambda ()
-         (when (string-match-p ,name (dired-current-directory))
-           ,@body)))))
+               (lambda ()
+                 (when (string-match-p ,name (dired-current-directory))
+                   ,@body)))))
 
 (defun setup-find-file-in-project ()
   (ffip-local-excludes "target" "overlays" "node_modules" "grunt_temp")
@@ -19,8 +19,8 @@
 (defun custom-persp/emacs ()
   (interactive)
   (custom-persp "emacs"
-        (set-background-color "black")
-        (find-file "~/.emacs.d/init.el")))
+                (set-background-color "black")
+                (find-file "~/.emacs.d/init.el")))
 
 (project-specifics ".emacs.d"
   (ffip-local-excludes "swank")
@@ -30,7 +30,7 @@
 (defun custom-persp/bin ()
   (interactive)
   (custom-persp "bin"
-                (set-alternative-background)
+                (set-background-color "#2d3743")
                 (find-file "/git/bin/")))
 
 (project-specifics "/git/bin")
@@ -38,7 +38,7 @@
 (defun custom-persp/dropbox ()
   (interactive)
   (custom-persp "dropbox"
-                (set-alternative-background)
+                (set-background-color "#2d3743")
                 (find-file "~/Dropbox/")))
 
 (project-specifics "~/Dropbox")
@@ -47,7 +47,7 @@
 (defun custom-persp/eika-ahv ()
   (interactive)
   (custom-persp "eika-ahv"
-                (set-alternative-background)
+                (set-background-color "#2d3743")
                 (find-file "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")))
 (project-specifics "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")
 
@@ -61,7 +61,7 @@
 (defun custom-persp/bli_kunde ()
   (interactive)
   (custom-persp "eika-bli-kunde"
-                (set-alternative-background)
+                (set-background-color "#2d3743")
                 (find-file "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
                 (set-background-color  "DarkSlateGray")))
 (project-specifics "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
@@ -70,7 +70,7 @@
 (defun custom-persp/eika-erklaring ()
   (interactive)
   (custom-persp "eika-eika-erklaring"
-                (set-alternative-background)
+                (set-background-color "#2d3743")
                 (find-file "/git/eika/antihvitvask-erklaering-angularjs-lib/")
                 (set-background-color  "gray20")))
 (project-specifics "/git/eika/antihvitvask-erklaering-angularjs-lib/")
@@ -80,8 +80,8 @@
 (defun custom-persp/stories-framework ()
   (interactive)
   (custom-persp "stories-framework"
-        (set-background-color "black")
-        (find-file "/finn/git/stories-framework/")))
+                (set-background-color "black")
+                (find-file "/finn/git/stories-framework/")))
 
 (project-specifics "/finn/git/stories-framework/"
   (setup-find-file-in-project))
@@ -90,8 +90,8 @@
 (defun custom-persp/self-service ()
   (interactive)
   (custom-persp "self-service"
-        (set-background-color "black")
-        (find-file "/finn/git/self-service/")))
+                (set-background-color "black")
+                (find-file "/finn/git/self-service/")))
 
 (project-specifics "/finn/git/self-service/"
   (setup-find-file-in-project))
@@ -104,15 +104,14 @@
      (defun ,(intern (concat "custom-persp/" name)) ()
        (interactive)
        (custom-persp ,name
-             (set-background-color "black")
-             (find-file ,(concat "/finn/git/" name "/"))))
+                     (set-background-color "black")
+                     (find-file ,(concat "/finn/git/" name "/"))))
 
      (defun ,(intern (concat "custom-persp/" name "-branched")) ()
        (interactive)
        (message (string= "iad" ,name))
        (custom-persp ,name
-                     (set-alternative-background)
-             (find-file ,(concat "/finn/git/" name "/"))))
+                     (find-file ,(concat "/finn/git/" name "/"))))
 
      (project-specifics ,(concat "/finn/git/" name "/")
        (set (make-local-variable 'sgml-basic-offset) 4)
@@ -121,18 +120,18 @@
 
 
        (cond
-    ((string= ,name "iad")
-     (iad-mode 1))
-    ((string= ,name "mfinn")
-     (mfinn-mode 1))
-    ((string= ,name "self-service")
-     (self-service-mode 1))
-    ((string= ,name "realestate-upsale")
-     (realestate-upsale-mode 1))
-    ((string= ,name "organisation-management-web")
-     (organisation-management-web-mode 1))
-    (t
-     (module-mode 1)))
+        ((string= ,name "iad")
+         (iad-mode 1))
+        ((string= ,name "mfinn")
+         (mfinn-mode 1))
+        ((string= ,name "self-service")
+         (self-service-mode 1))
+        ((string= ,name "realestate-upsale")
+         (realestate-upsale-mode 1))
+        ((string= ,name "organisation-management-web")
+         (organisation-management-web-mode 1))
+        (t
+         (module-mode 1)))
 
        ;; (case ,name
        ;;   ("iad"  (iad-mode 1))
