@@ -133,6 +133,7 @@
         paredit-wrap-square
         quoted-insert
         save-region-or-current-line
+        save-some-buffers
         sgml-delete-tag
         sgml-maybe-name-self
         sgml-slash
