@@ -103,6 +103,7 @@
      string-edit
      js2-mode
      js2-refactor
+     swiper
      )))
 
 (condition-case nil
