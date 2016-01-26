@@ -18,3 +18,4 @@ site-lisp/adventur-mode
 /.sx/
 /ensime/
 
+smex-items
