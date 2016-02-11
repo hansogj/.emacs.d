@@ -32,9 +32,9 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (if (or (equal user-login-name  "hansogj") 
+      (if (or (equal user-login-name  "fihagjer") 
               (equal user-login-name "ekst_hogj"))
-          (concat user-emacs-directory "users/" "fihagjer")
+          (concat user-emacs-directory "users/" "hansogj")
         (concat user-emacs-directory "users/" user-login-name)))
 (add-to-list 'load-path user-settings-dir)
 

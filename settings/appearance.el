@@ -63,8 +63,10 @@
 
 ;; Unclutter the modeline
 (require 'diminish)
-(if (or (equal (getenv "USER")  "smiley") 
-        (equal (getenv "USER") "fihagjer"))
+(if (or (equal (getenv "USER")  "smiley")
+        (equal (getenv "USER") "fihagjer")
+        (equal (getenv "USER") "ekst_hogj")
+        (equal (getenv "USER") "hansogj"))
     (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
   (eval-after-load "yasnippet" '(diminish 'yas-minor-mode)))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))

@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;fihagjer bindings
+;;hansogj bindings
 (define-key global-map (kbd "M-s +") 'zoom-in)
 (define-key global-map (kbd "M-s -") 'zoom-out)
 
@@ -22,4 +22,4 @@
 
 
 
-(provide 'key-bindings-fihagjer)
+(provide 'key-bindings-hansogj)

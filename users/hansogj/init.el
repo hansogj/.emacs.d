@@ -1,5 +1,5 @@
 (message " hello from init")
-;;fihagjer changes
+;;hansogj changes
 (add-to-list 'load-path "./site-lisp/emacs-nav/")
 (require 'nav)
 (nav-disable-overeager-window-splitting)
@@ -146,7 +146,7 @@
 ;; Font size
 (require 'iso-transl)
 (require 'transparency)
-(require 'key-bindings-fihagjer)
+(require 'key-bindings-hansogj)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
