@@ -11,9 +11,14 @@
                  (when (string-match-p ,name (dired-current-directory))
                    ,@body)))))
 
-(defun setup-find-file-in-project ()
+(defun setup-find-file-in-finn-project ()
   (ffip-local-excludes "target" "overlays" "node_modules" "grunt_temp")
   (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "tiles*.xml" "pom.xml" "jsTestDriver.conf" "jawrbundle.properties" "*.rb" "*.feature"))
+
+(defun setup-find-file-in-project ()
+  (ffip-local-excludes "target" "overlays" "node_modules" "grunt_temp")
+  (ffip-local-patterns "*.js" "*.java" "*.jsp" "*.mustache" "*.css" "tiles*.xml" "pom.xml"))
+
 
 ;; Emacs
 (defun custom-persp/emacs ()
@@ -64,7 +69,8 @@
                 (set-background-color "#2d3743")
                 (find-file "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
                 (set-background-color  "DarkSlateGray")))
-(project-specifics "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
+(project-specifics "/git/eika/bli_kunde/nettbank/web/src/angular-app/"
+  (setup-find-file-in-finn-project))
 
 
 (defun custom-persp/eika-erklaring ()
@@ -84,7 +90,7 @@
                 (find-file "/finn/git/stories-framework/")))
 
 (project-specifics "/finn/git/stories-framework/"
-  (setup-find-file-in-project))
+  (setup-find-file-in-finn-project))
 
 ;; self-service
 (defun custom-persp/self-service ()
@@ -94,7 +100,7 @@
                 (find-file "/finn/git/self-service/")))
 
 (project-specifics "/finn/git/self-service/"
-  (setup-find-file-in-project))
+  (setup-find-file-in-finn-project))
 
 ;; Finn
 
@@ -138,7 +144,7 @@
        ;;   ("mfinn" (mfinn-mode 1))
        ;;   (otherwise module-mode 1))
 
-       (setup-find-file-in-project))
+       (setup-find-file-in-finn-project))
 
      (define-key persp-mode-map (kbd ,(concat "C-x p " shortcut)) ',(intern (concat "custom-persp/" name)))
      (define-key persp-mode-map (kbd ,(concat "C-x p B " shortcut)) ',(intern (concat "custom-persp/" name "-branched")))))
@@ -164,5 +170,5 @@
 (define-key persp-mode-map (kbd "C-x p e a") 'custom-persp/eika-ahv)
 (define-key persp-mode-map (kbd "C-x p e r") 'custom-persp/eika-raadgiverportal_boostrap-lib)
 (define-key persp-mode-map (kbd "C-x p b i") 'custom-persp/bin)
-(define-key persp-mode-map (kbd "C-x p d") 'custom-persp/dropbox)
+(define-key persp-mode-map (kbd "C-x p d")   'custom-persp/dropbox)
 (define-key persp-mode-map (kbd "C-x p s f") 'custom-persp/stories-framework)
