@@ -52,7 +52,7 @@
 (defun custom-persp/eika-ahv ()
   (interactive)
   (custom-persp "eika-ahv"
-                (set-background-color "#2d3743")
+                (set-background-color "#391111")
                 (find-file "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")))
 (project-specifics "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")
 

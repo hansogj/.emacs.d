@@ -17,7 +17,7 @@
          (nth 4 parse-state)))))
 ;;;
 
-
+(setq-default js2-object-property "#391111")
 (setq-default js2-allow-rhino-new-expr-initializer nil)
 (setq-default js2-auto-indent-p nil)
 (setq-default js2-enter-indents-newline nil)
