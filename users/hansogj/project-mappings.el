@@ -66,9 +66,8 @@
 (defun custom-persp/bli_kunde ()
   (interactive)
   (custom-persp "eika-bli-kunde"
-                (set-background-color "#2d3743")
                 (find-file "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
-                (set-background-color  "DarkSlateGray")))
+                (set-background-color "#002b36")))
 (project-specifics "/git/eika/bli_kunde/nettbank/web/src/angular-app/"
   (setup-find-file-in-finn-project))
 

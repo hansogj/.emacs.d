@@ -80,7 +80,7 @@
    (list
     (completing-read "choose color:" '("gray20" "darkslategray" "black" "kindOfBlue" "dreadfullRed" "poisonGreen"))))
   (if (equal color "kindOfBlue")
-      (setq color "#2d3743")
+      (setq color "#002b36")
     nil)
   (if (equal color "poisonGreen")
       (setq color "#082500")
@@ -90,7 +90,6 @@
     nil)
   (message "change background-color: " color)
   (set-background-color color))
-;;  (set-background-color "#2d3743")
 
 (defun one-liner ()
   "kill whitespace befor and after a line"
