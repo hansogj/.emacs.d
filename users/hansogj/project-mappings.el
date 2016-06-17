@@ -35,24 +35,22 @@
 (defun custom-persp/bin ()
   (interactive)
   (custom-persp "bin"
-                (set-background-color "#2d3743")
+                (set-background-color kindOfBlue)
                 (find-file "/git/bin/")))
-
 (project-specifics "/git/bin")
 
 (defun custom-persp/dropbox ()
   (interactive)
   (custom-persp "dropbox"
-                (set-background-color "#2d3743")
+                (set-background-color poisonGreen)
                 (find-file "~/Dropbox/")))
-
 (project-specifics "~/Dropbox")
 
 
 (defun custom-persp/eika-ahv ()
   (interactive)
   (custom-persp "eika-ahv"
-                (set-background-color "#391111")
+                (set-background-color dreadfullRed)
                 (find-file "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")))
 (project-specifics "/git/eika/antihvitvask/portal/intraweb/src/angular-app/")
 
@@ -67,7 +65,7 @@
   (interactive)
   (custom-persp "eika-bli-kunde"
                 (find-file "/git/eika/bli_kunde/nettbank/web/src/angular-app/")
-                (set-background-color "#002b36")))
+                (set-background-color kindOfBlue)))
 (project-specifics "/git/eika/bli_kunde/nettbank/web/src/angular-app/"
   (setup-find-file-in-finn-project))
 
@@ -75,9 +73,9 @@
 (defun custom-persp/eika-erklaring ()
   (interactive)
   (custom-persp "eika-eika-erklaring"
-                (set-background-color "#2d3743")
                 (find-file "/git/eika/antihvitvask-erklaering-angularjs-lib/")
                 (set-background-color  "gray20")))
+                (set-background-color "#2d3743")
 (project-specifics "/git/eika/antihvitvask-erklaering-angularjs-lib/")
 
 

@@ -74,19 +74,23 @@
           (re-search-forward "[ \t\r\n]+" nil t)
           (replace-match "" nil nil))))))
 
+(defvar kindOfBlue   "#002b36")
+(defvar dreadfullRed "#391111")
+(defvar poisonGreen  "#082500")
+
 (defun set-background-custom (color)
   "Setting alternative background color"
   (interactive
    (list
     (completing-read "choose color:" '("gray20" "darkslategray" "black" "kindOfBlue" "dreadfullRed" "poisonGreen"))))
   (if (equal color "kindOfBlue")
-      (setq color "#002b36")
+      (setq color kindOfBlue)
     nil)
   (if (equal color "poisonGreen")
-      (setq color "#082500")
+      (setq color poisonGreen)
     nil)
   (if (equal color "dreadfullRed")
-      (setq color "#391111")
+      (setq color dreadfullRed)
     nil)
   (message "change background-color: " color)
   (set-background-color color))
