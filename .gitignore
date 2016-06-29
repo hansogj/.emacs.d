@@ -19,3 +19,4 @@ site-lisp/adventur-mode
 /ensime/
 
 smex-items
+ido.last
