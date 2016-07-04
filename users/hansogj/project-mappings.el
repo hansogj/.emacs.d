@@ -47,6 +47,14 @@
 (project-specifics "~/Dropbox")
 
 
+(defun custom-persp/eika-ahv-nettbank ()
+  (interactive)
+  (custom-persp "eika-ahv-nettbank"
+                (set-background-color poisonGreen)
+                (find-file "/git/eika/antihvitvask-nettbank/web/src/angular-app/")))
+(project-specifics "/git/eika/antihvitvask-nettbank/web/src/angular-app/")
+
+
 (defun custom-persp/eika-ahv ()
   (interactive)
   (custom-persp "eika-ahv"
@@ -165,6 +173,7 @@
 (define-key persp-mode-map (kbd "C-x p e e") 'custom-persp/eika-erklaring)
 (define-key persp-mode-map (kbd "C-x p b k") 'custom-persp/bli_kunde)
 (define-key persp-mode-map (kbd "C-x p e a") 'custom-persp/eika-ahv)
+(define-key persp-mode-map (kbd "C-x p a n") 'custom-persp/eika-ahv-nettbank)
 (define-key persp-mode-map (kbd "C-x p e r") 'custom-persp/eika-raadgiverportal_boostrap-lib)
 (define-key persp-mode-map (kbd "C-x p b i") 'custom-persp/bin)
 (define-key persp-mode-map (kbd "C-x p d")   'custom-persp/dropbox)
