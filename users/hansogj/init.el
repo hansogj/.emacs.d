@@ -1,10 +1,14 @@
 (message " hello from init")
 ;;hansogj changes
-(add-to-list 'load-path "./site-lisp/emacs-nav/")
-(require 'nav)
-(nav-disable-overeager-window-splitting)
-;; Optional: set up a quick key to toggle nav
-(global-set-key [f8] 'nav-toggle)
+;; (add-to-list 'load-path "./site-lisp/emacs-nav/")
+;; (require 'nav)
+;; (nav-disable-overeager-window-splitting)
+;; ;; Optional: set up a quick key to toggle nav
+;; (global-set-key [f8] 'nav-toggle)
+(add-to-list 'load-path "site-lisp/emacs-neotree")
+(require 'neotree)
+
+
 
 (defun svn-meld ()
   (interactive)

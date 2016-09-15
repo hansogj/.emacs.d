@@ -107,3 +107,6 @@
 [submodule "site-lisp/datomic-snippets"]
 	path = site-lisp/datomic-snippets
 	url = https://github.com/magnars/datomic-snippets.git
+[submodule "site-lisp/emacs-neotree"]
+	path = site-lisp/emacs-neotree
+	url = https://github.com/jaypei/emacs-neotree.git
