@@ -2,6 +2,7 @@
 
 ;; Use only own snippets, do not use bundled ones
 (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+
 (yas-global-mode 1)
 
 ;; Include snippets for stuff
@@ -18,7 +19,7 @@
   (let* ((snippet (car (yas--snippets-at-point)))
         (position (yas--field-end (yas--snippet-active-field snippet))))
     (if (= (point) position)
-        (move-end-of-line 1)
+       (move-end-of-line 1)
       (goto-char position))))
 
 (defun yas-goto-start-of-active-field ()
