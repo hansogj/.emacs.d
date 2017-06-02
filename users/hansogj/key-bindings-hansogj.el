@@ -19,6 +19,7 @@
 (global-set-key (kbd "M-s M-d") 'sgml-delete-tag)
 (global-set-key (kbd "C-c t") 'toggle-transparency)
 (global-set-key (kbd "C-c C-b") 'set-background-custom)
+(global-set-key (kbd "S-M-<down>") 'duplicate-current-line)
 (global-set-key [f8] 'neotree-toggle)
 
 
