@@ -70,7 +70,7 @@
 (set-default 'indicate-empty-lines t)
 
 ;; Easily navigate sillycased words
-;;(global-subword-mode 1)
+(global-subword-mode 1)
 
 ;; Don't break lines for me, please
 (setq-default truncate-lines t)
@@ -127,6 +127,8 @@
       ad-do-it)
     (dotimes (i 10)
       (when (= p (point)) ad-do-it))))
+
+(setq set-mark-command-repeat-pop t)
 
 ;; Offer to create parent directories if they do not exist
 ;; http://iqbalansari.github.io/blog/2014/12/07/automatically-create-parent-directories-on-visiting-a-new-file-in-emacs/

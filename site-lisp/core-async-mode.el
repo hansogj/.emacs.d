@@ -4,6 +4,7 @@
 
 (require 'dash)
 (require 'clj-refactor)
+(require 'old-clj-refactor-stuff)
 
 (defvar core-async--functions
   (list
@@ -18,16 +19,21 @@
   (list "go" "go-loop"))
 
 (defvar core-async--functions-re
-  (concat "(" (regexp-opt (-concat core-async--functions
-                                   core-async--macros)
-                          'symbols)))
+  (concat (regexp-opt '("(" "["))
+          (regexp-opt (-concat core-async--functions
+                               core-async--macros)
+                      'symbols)))
+
+(defun core-async--in-comment? ()
+  (nth 4 (syntax-ppss)))
 
 (defun core-async--find-usages ()
   (let (result)
     (save-excursion
       (goto-char (point-min))
       (while (re-search-forward core-async--functions-re nil t)
-        (!cons (cljr--find-symbol-at-point) result)))
+        (unless (core-async--in-comment?)
+          (!cons (cider-symbol-at-point) result))))
     (-distinct result)))
 
 (defun core-async--remove-from-ns (type s)
@@ -48,10 +54,10 @@
         (cljr--insert-in-ns ":require")
         (insert "[clojure.core.async :refer [")
         (apply 'insert (->> usages
-                            (-sort cljr-sort-comparator)
+                            (-sort ocljr-sort-comparator)
                             (-interpose " ")))
         (insert "]]")))
-    (cljr-sort-ns)))
+    (ocljr-sort-ns)))
 
 (defun core-async--update-cljs-namespace ()
   (save-excursion
@@ -65,7 +71,7 @@
         (just-one-space)
         (insert "[cljs.core.async :refer [")
         (apply 'insert (->> used-fns
-                            (-sort cljr-sort-comparator)
+                            (-sort ocljr-sort-comparator)
                             (-interpose " ")))
         (insert "]]"))
       (when used-macros
@@ -73,10 +79,10 @@
         (just-one-space)
         (insert "[cljs.core.async.macros :refer [")
         (apply 'insert (->> used-macros
-                            (-sort cljr-sort-comparator)
+                            (-sort ocljr-sort-comparator)
                             (-interpose " ")))
         (insert "]]"))
-      (cljr-sort-ns))))
+      (ocljr-sort-ns))))
 
 (defun core-async-update-namespace ()
   (interactive)

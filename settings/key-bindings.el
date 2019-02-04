@@ -12,9 +12,9 @@
 (global-set-key (kbd "s-.") 'copy-from-above-command)
 
 ;; Smart M-x
-;;(global-set-key (kbd "M-x") 'smex)
-;;(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-;;(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; Use C-x C-m to do M-x per Steve Yegge's advice
 (global-set-key (kbd "C-x C-m") 'smex)
@@ -167,7 +167,6 @@
 (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
 
 (global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
-(global-set-key (kbd "C-x 4") 'split-four)
 
 ;; Add region to *multifile*
 (global-set-key (kbd "C-!") 'mf/mirror-region-in-multifile)
@@ -180,17 +179,19 @@
 
 ;; Should be able to eval-and-replace anywhere.
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)
+(global-set-key (kbd "M-s-e") 'eval-and-replace)
 
 ;; Navigation bindings
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
 (global-set-key (kbd "<prior>") 'beginning-of-buffer)
-(global-set-key (kbd "M-<home>") 'beginning-of-buffer)
+(global-set-key (kbd "<home>") 'beginning-of-buffer)
 (global-set-key (kbd "<next>") 'end-of-buffer)
-(global-set-key (kbd "M-<end>") 'end-of-buffer)
+(global-set-key (kbd "<end>") 'end-of-buffer)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
-(global-set-key (kbd "C-z") 'undo)
+(global-set-key (kbd "H-n") 'goto-next-line-with-same-indentation)
+(global-set-key (kbd "H-p") 'goto-prev-line-with-same-indentation)
 
 (global-set-key (kbd "M-<up>") 'smart-up)
 (global-set-key (kbd "M-<down>") 'smart-down)
@@ -202,7 +203,6 @@
 (global-set-key (kbd "C-x M-g") 'browse-url-at-point)
 
 ;; Completion at point
-
 (global-set-key (kbd "C-<tab>") 'completion-at-point)
 
 ;; Like isearch, but adds region (if any) to history and deactivates mark
@@ -218,9 +218,6 @@
 (global-set-key (kbd "C-S-p") (λ (ignore-errors (previous-line 5))))
 (global-set-key (kbd "C-S-f") (λ (ignore-errors (forward-char 5))))
 (global-set-key (kbd "C-S-b") (λ (ignore-errors (backward-char 5))))
-
-(global-set-key (kbd "H-*") 'beginning-of-buffer) ;; H-p
-(global-set-key (kbd "H-n") 'end-of-buffer)
 
 ;; Convenience on ThinkPad Keyboard: Use back/forward as pg up/down
 (global-set-key (kbd "<XF86Back>") 'scroll-down)
@@ -252,7 +249,6 @@
 ;; Magit
 (global-set-key (kbd "C-x m") 'magit-status-fullscreen)
 (autoload 'magit-status-fullscreen "magit")
-
 
 ;; Clever newlines
 (global-set-key (kbd "C-o") 'open-line-and-indent)
@@ -318,10 +314,9 @@
 ;; Find file in project, with specific patterns
 (global-unset-key (kbd "C-x C-o")) ;; which used to be delete-blank-lines (also bound to C-c C-<return>)
 (global-set-key (kbd "C-x C-o ja") (ffip-create-pattern-file-finder "*.java"))
-(global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js*"))
-;;(global-set-key (kbd "C-x C-o jx") (ffip-create-pattern-file-finder "*.jsx"))
+(global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js"))
+(global-set-key (kbd "C-x C-o jn") (ffip-create-pattern-file-finder "*.json"))
 (global-set-key (kbd "C-x C-o ht") (ffip-create-pattern-file-finder "*.html"))
-(global-set-key (kbd "C-x C-o mu") (ffip-create-pattern-file-finder "*.mustache"))
 (global-set-key (kbd "C-x C-o jp") (ffip-create-pattern-file-finder "*.jsp"))
 (global-set-key (kbd "C-x C-o cs") (ffip-create-pattern-file-finder "*.css"))
 (global-set-key (kbd "C-x C-o ft") (ffip-create-pattern-file-finder "*.feature"))
@@ -341,9 +336,12 @@
 (global-set-key (kbd "C-x C-o gr") (ffip-create-pattern-file-finder "*.groovy"))
 (global-set-key (kbd "C-x C-o ga") (ffip-create-pattern-file-finder "*.gradle"))
 (global-set-key (kbd "C-x C-o sc") (ffip-create-pattern-file-finder "*.scala"))
+(global-set-key (kbd "C-x C-o ss") (ffip-create-pattern-file-finder "*.scss"))
 (global-set-key (kbd "C-x C-o co") (ffip-create-pattern-file-finder "*.conf"))
 (global-set-key (kbd "C-x C-o j2") (ffip-create-pattern-file-finder "*.j2"))
 (global-set-key (kbd "C-x C-o sh") (ffip-create-pattern-file-finder "*.sh"))
+(global-set-key (kbd "C-x C-o ic") (ffip-create-pattern-file-finder "*.ico"))
+(global-set-key (kbd "C-x C-o sv") (ffip-create-pattern-file-finder "*.svg"))
 (global-set-key (kbd "C-x C-o !") (ffip-create-pattern-file-finder "*"))
 
 ;; View occurrence in occur mode

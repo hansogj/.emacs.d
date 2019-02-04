@@ -1,10 +1,13 @@
-(setq visible-bell t
-      font-lock-maximum-decoration t
+(setq font-lock-maximum-decoration t
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
-(set-face-background 'region "#464740")
-(set-face-foreground 'font-lock-comment-face "#999999")
+;; Don't beep. Don't visible-bell (fails on el capitan). Just blink the modeline on errors.
+
+(setq visible-bell nil)
+(setq ring-bell-function (lambda ()
+                           (invert-face 'mode-line)
+                           (run-with-timer 0.05 nil 'invert-face 'mode-line)))
 
 ;; Highlight current line
 (global-hl-line-mode 1)
@@ -61,14 +64,31 @@
 ;; Make zooming affect frame instead of buffers
 (require 'zoom-frm)
 
+(defun enable-zoom-one-shot-keybindings ()
+  (set-transient-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map (kbd "+") 'zoom-frm-in)
+     (define-key map (kbd "-") 'zoom-frm-out)
+     (define-key map (kbd "0") 'zoom-frm-unzoom)
+     map) t))
+
+(defun zoom-frame-in ()
+  (interactive)
+  (zoom-frm-in)
+  (enable-zoom-one-shot-keybindings))
+
+(defun zoom-frame-out ()
+  (interactive)
+  (zoom-frm-out)
+  (enable-zoom-one-shot-keybindings))
+
+(global-set-key (kbd "C-x +") 'zoom-frame-in)
+(global-set-key (kbd "C-x -") 'zoom-frame-out)
+(global-set-key (kbd "C-x C-0") 'zoom-frm-unzoom)
+
 ;; Unclutter the modeline
 (require 'diminish)
-(if (or (equal (getenv "USER")  "smiley")
-        (equal (getenv "USER") "fihagjer")
-        (equal (getenv "USER") "ekst_hogj")
-        (equal (getenv "USER") "hansogj"))
-    (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-  (eval-after-load "yasnippet" '(diminish 'yas-minor-mode)))
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "paredit" '(diminish 'paredit-mode))
 (eval-after-load "tagedit" '(diminish 'tagedit-mode))

@@ -1,13 +1,14 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
-(package-initialize)
-
 ;; Turn off mouse interface early in startup to avoid momentary display
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+(package-initialize)
+
+;; Remove security vulnerability
+(eval-after-load "enriched"
+  '(defun enriched-decode-display-prop (start end &optional param)
+     (list start end)))
 
 ;; No splash screen please ... jeez
 (setq inhibit-startup-message t)
@@ -32,10 +33,7 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (if (or (equal user-login-name  "fihagjer") 
-              (equal user-login-name "ekst_hogj"))
-          (concat user-emacs-directory "users/" "hansogj")
-        (concat user-emacs-directory "users/" user-login-name)))
+      (concat user-emacs-directory "users/" user-login-name))
 (add-to-list 'load-path user-settings-dir)
 
 ;; Add external projects to load path
@@ -58,7 +56,6 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
-(setq is-linux (equal system-type 'gnu/linux))
 
 ;; Setup packages
 (require 'setup-package)
@@ -66,44 +63,48 @@
 ;; Install extensions if they're missing
 (defun init--install-packages ()
   (packages-install
-   '(magit
-     paredit
-     move-text
-     gist
-     htmlize
-     visual-regexp
-     markdown-mode
-     fill-column-indicator
-     flycheck
-     flycheck-pos-tip
-     flycheck-clojure
-     flx
-     f
-     flx-ido
-     dired-details
-     css-eldoc
-     yasnippet
-     smartparens
-     ido-vertical-mode
-     ido-at-point
-     simple-httpd
-     guide-key
-     nodejs-repl
-     restclient
-     highlight-escape-sequences
-     whitespace-cleanup-mode
-     elisp-slime-nav
-     dockerfile-mode
+   '(
+     cider
      clojure-mode
      clojure-mode-extra-font-locking
+     css-eldoc
+     diff-hl
+     dockerfile-mode
+     edn
+     elisp-slime-nav
+     f
+     fill-column-indicator
+     flx
+     flx-ido
+     flycheck
+     flycheck-pos-tip
+     gist
      groovy-mode
+     guide-key
+     highlight-escape-sequences
+     htmlize
+     hydra
+     ido-at-point
+     ido-completing-read+
+     ido-vertical-mode
+     inflections
+     magit
+     markdown-mode
+     move-text
+     nodejs-repl
+     paredit
+     perspective
      prodigy
-     cider
-     yesql-ghosts
+     projectile
+     request
+     restclient
+     simple-httpd
+     smartparens
      string-edit
-     js2-mode
-     js2-refactor
-     swiper
+     visual-regexp
+     wgrep
+     whitespace-cleanup-mode
+     yasnippet
      )))
 
 (condition-case nil
@@ -132,8 +133,8 @@
 (eval-after-load 'org '(require 'setup-org))
 (eval-after-load 'dired '(require 'setup-dired))
 (eval-after-load 'magit '(require 'setup-magit))
-(eval-after-load 'grep '(require 'setup-rgrep))
 (eval-after-load 'shell '(require 'setup-shell))
+(require 'setup-rgrep)
 (require 'setup-hippie)
 (require 'setup-yasnippet)
 (require 'setup-perspective)
@@ -170,7 +171,6 @@
 (autoload 'skewer-start "setup-skewer" nil t)
 (autoload 'skewer-demo "setup-skewer" nil t)
 (autoload 'auto-complete-mode "auto-complete" nil t)
-(eval-after-load 'flycheck '(require 'setup-flycheck))
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -196,7 +196,6 @@
 (require 'delsel)
 (require 'jump-char)
 (require 'eproject)
-(require 'wgrep)
 (require 'smart-forward)
 (require 'change-inner)
 (require 'multifiles)
@@ -217,7 +216,7 @@
 
 ;; Smart M-x is smart
 (require 'smex)
-;;(smex-initialize)
+(smex-initialize)
 
 ;; Setup key bindings
 (require 'key-bindings)
@@ -226,7 +225,6 @@
 (require 'project-archetypes)
 (require 'my-misc)
 (when is-mac (require 'mac))
-(when is-linux (require 'linux))
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
@@ -245,3 +243,4 @@
 ;; Conclude init by setting up specifics for the current user
 (when (file-exists-p user-settings-dir)
   (mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))
+
