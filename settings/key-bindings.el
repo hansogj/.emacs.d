@@ -106,8 +106,10 @@
 (global-set-key (kbd "s-w") 'save-region-or-current-line)
 (global-set-key (kbd "M-W") (λ (save-region-or-current-line 1)))
 
-;; Make shell more convenient, and suspend-frame less
-(global-set-key (kbd "C-z") 'shell)
+;; Make shell and suspend-frame less convenient
+;; Do nothing on C-z, since I repeatedly mistakenly type it
+(global-set-key (kbd "C-z") (λ nil))
+(global-set-key (kbd "C-x C-z") 'shell)
 (global-set-key (kbd "C-x M-z") 'suspend-frame)
 
 ;; Zap to char
@@ -167,6 +169,7 @@
 (global-unset-key (kbd "C-x C-+")) ;; don't zoom like this
 
 (global-set-key (kbd "C-x 3") 'split-window-right-and-move-there-dammit)
+(global-set-key (kbd "C-x 4") 'split-four)
 
 ;; Add region to *multifile*
 (global-set-key (kbd "C-!") 'mf/mirror-region-in-multifile)
@@ -185,11 +188,12 @@
 (global-set-key [remap goto-line] 'goto-line-with-feedback)
 
 (global-set-key (kbd "<prior>") 'beginning-of-buffer)
-(global-set-key (kbd "<home>") 'beginning-of-buffer)
+(global-set-key (kbd "M-<home>") 'beginning-of-buffer)
 (global-set-key (kbd "<next>") 'end-of-buffer)
-(global-set-key (kbd "<end>") 'end-of-buffer)
+(global-set-key (kbd "M-<end>") 'end-of-buffer)
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "C-z") 'undo)
 (global-set-key (kbd "H-n") 'goto-next-line-with-same-indentation)
 (global-set-key (kbd "H-p") 'goto-prev-line-with-same-indentation)
 
@@ -218,6 +222,9 @@
 (global-set-key (kbd "C-S-p") (λ (ignore-errors (previous-line 5))))
 (global-set-key (kbd "C-S-f") (λ (ignore-errors (forward-char 5))))
 (global-set-key (kbd "C-S-b") (λ (ignore-errors (backward-char 5))))
+
+(global-set-key (kbd "H-*") 'beginning-of-buffer) ;; H-p
+(global-set-key (kbd "H-n") 'end-of-buffer)
 
 ;; Convenience on ThinkPad Keyboard: Use back/forward as pg up/down
 (global-set-key (kbd "<XF86Back>") 'scroll-down)
@@ -317,6 +324,7 @@
 (global-set-key (kbd "C-x C-o js") (ffip-create-pattern-file-finder "*.js"))
 (global-set-key (kbd "C-x C-o jn") (ffip-create-pattern-file-finder "*.json"))
 (global-set-key (kbd "C-x C-o ht") (ffip-create-pattern-file-finder "*.html"))
+(global-set-key (kbd "C-x C-o mu") (ffip-create-pattern-file-finder "*.mustache"))
 (global-set-key (kbd "C-x C-o jp") (ffip-create-pattern-file-finder "*.jsp"))
 (global-set-key (kbd "C-x C-o cs") (ffip-create-pattern-file-finder "*.css"))
 (global-set-key (kbd "C-x C-o ft") (ffip-create-pattern-file-finder "*.feature"))

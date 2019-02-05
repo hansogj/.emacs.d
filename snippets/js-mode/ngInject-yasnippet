@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ngInject
+# key: ink
+# --
+'ngInject';
+$0

@@ -7,7 +7,7 @@
 
 (setq package-pinned-packages '())
 
-(package-initialize)
+(when (version< emacs-version "27.0") (package-initialize))
 
 (unless (file-exists-p "~/.emacs.d/elpa/archives/melpa")
   (package-refresh-contents))

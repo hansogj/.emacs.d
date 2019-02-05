@@ -9,6 +9,7 @@ elpa
 swank
 emms
 site-lisp/adventur-mode
+site-lisp/emacs-neotree
 *.elc
 .DS_Store
 .yas-compiled-snippets.el

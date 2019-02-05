@@ -3,7 +3,7 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
-(package-initialize)
+(when (version< emacs-version "27.0") (package-initialize))
 
 ;; Remove security vulnerability
 (eval-after-load "enriched"
@@ -33,7 +33,10 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (concat user-emacs-directory "users/" user-login-name))
+      (if (or (equal user-login-name  "fihagjer") 
+              (equal user-login-name "ekst_hogj"))
+          (concat user-emacs-directory "users/" "hansogj")
+        (concat user-emacs-directory "users/" user-login-name)))
 (add-to-list 'load-path user-settings-dir)
 
 ;; Add external projects to load path
@@ -46,6 +49,13 @@
       `(("." . ,(expand-file-name
                  (concat user-emacs-directory "backups")))))
 
+;; Write all autosave files in the tmp dir
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+;; Don't write lock-files, I'm the only one here
+(setq create-lockfiles nil)
+
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
@@ -56,6 +66,7 @@
 
 ;; Are we on a mac?
 (setq is-mac (equal system-type 'darwin))
+(setq is-linux (equal system-type 'gnu/linux))
 
 ;; Setup packages
 (require 'setup-package)
@@ -225,6 +236,7 @@
 (require 'project-archetypes)
 (require 'my-misc)
 (when is-mac (require 'mac))
+(when is-linux (require 'linux))
 
 ;; Elisp go-to-definition with M-. and back again with M-,
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav")
