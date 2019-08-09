@@ -1,1 +1,1 @@
-("/git/.emacs.d/" "/git/ng-hateoas-client/" "/git/pov-ng-rest-component/" "/git/.emacs.d/site-lisp/angular-snippets/" "/git/chrome-extension-discogs-add-collection/" "/git/bin/")
+("/git/bin/" "/git/.emacs.d/" "/git/.emacs.d/site-lisp/angular-snippets/")

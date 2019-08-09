@@ -33,8 +33,9 @@
 
 ;; Settings for currently logged in user
 (setq user-settings-dir
-      (if (or (equal user-login-name  "fihagjer") 
-              (equal user-login-name "ekst_hogj"))
+      (if (or (equal user-login-name  "fihagjer")
+              (equal user-login-name "ekst_hogj")
+              (equal user-login-name "ii7"))
           (concat user-emacs-directory "users/" "hansogj")
         (concat user-emacs-directory "users/" user-login-name)))
 (add-to-list 'load-path user-settings-dir)
@@ -255,4 +256,3 @@
 ;; Conclude init by setting up specifics for the current user
 (when (file-exists-p user-settings-dir)
   (mapc 'load (directory-files user-settings-dir nil "^[^#].*el$")))
-
